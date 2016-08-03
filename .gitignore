@@ -1,0 +1,7 @@
+.DS_Store
+/Coffee/Coffee.xcodeproj/project.xcworkspace/
+/Coffee/Coffee.xcodeproj/xcuserdata/
+/Pods/
+/coffee.xcworkspace/
+coffee.xcworkspace
+Podfile.lock

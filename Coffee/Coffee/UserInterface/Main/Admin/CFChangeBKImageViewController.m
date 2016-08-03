@@ -21,10 +21,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"231b13"];
     _images = [[[NSBundle mainBundle] pathsForResourcesOfType:@"jpg" inDirectory:@"Images"] copy];
     self.navigationItem.title = @"选择背景图片";
-    self.view.backgroundColor = [UIColor whiteColor];
-    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(popCurrentViewController)];
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
     layout.itemSize = CGSizeMake(250, 200);
     layout.minimumLineSpacing = 10.f;
@@ -32,7 +32,6 @@
     
     UICollectionView *collection = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
     collection.contentInset = UIEdgeInsetsMake(20, 20, 20, 20);
-    collection.backgroundColor = [UIColor whiteColor];
     collection.delegate = self;
     collection.dataSource = self;
     [collection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"imageCell"];

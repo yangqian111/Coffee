@@ -33,8 +33,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self getAllCoffee];
-    
-    self.view.backgroundColor = [UIColor whiteColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeBK) name:kChangeApplicationBK object:nil];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting"] style:UIBarButtonItemStylePlain target:self action:@selector(setting)];

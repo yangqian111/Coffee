@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CFAdminMainViewController : UIViewController
+@interface CFAdminMainViewController : CFBaseViewController
 
 @end

@@ -10,7 +10,7 @@
 
 #define kAddCoffeeSuccess @"kAddCoffeeSuccess"
 
-@interface CFAddCoffeeViewController : UIViewController
+@interface CFAddCoffeeViewController : CFBaseViewController
 
 - (instancetype)initWithIndex:(NSUInteger)index;
 

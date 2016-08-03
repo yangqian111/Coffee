@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		320E2326655F0556350FED79 /* libPods-Coffee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 725C6117BACCF014A46337B6 /* libPods-Coffee.a */; };
+		5613E8941D51F6DD00316704 /* CFBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5613E8931D51F6DD00316704 /* CFBaseViewController.m */; };
 		562EA8381D4A04D00023D753 /* UIView+HSUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 562EA8371D4A04D00023D753 /* UIView+HSUIView.m */; };
 		562EA83F1D4B0CAE0023D753 /* XWDragCellCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 562EA83E1D4B0CAE0023D753 /* XWDragCellCollectionView.m */; };
 		562EA8501D4B38540023D753 /* CFAdminMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 562EA8451D4B38540023D753 /* CFAdminMainViewController.m */; };
@@ -54,6 +55,8 @@
 /* Begin PBXFileReference section */
 		1624FCE9E6BE18796066826A /* Pods-Coffee.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coffee.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Coffee/Pods-Coffee.release.xcconfig"; sourceTree = "<group>"; };
 		234CB3DDAA60062B63E8BBB9 /* Pods-Coffee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coffee.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-Coffee/Pods-Coffee.debug.xcconfig"; sourceTree = "<group>"; };
+		5613E8921D51F6DD00316704 /* CFBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFBaseViewController.h; sourceTree = "<group>"; };
+		5613E8931D51F6DD00316704 /* CFBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFBaseViewController.m; sourceTree = "<group>"; };
 		562EA8361D4A04D00023D753 /* UIView+HSUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HSUIView.h"; sourceTree = "<group>"; };
 		562EA8371D4A04D00023D753 /* UIView+HSUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HSUIView.m"; sourceTree = "<group>"; };
 		562EA83D1D4B0CAE0023D753 /* XWDragCellCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XWDragCellCollectionView.h; sourceTree = "<group>"; };
@@ -294,6 +297,8 @@
 				562EA84D1D4B38540023D753 /* User */,
 				56D4BD9A1D48552A0093EAFF /* CFRootViewController.h */,
 				56D4BD9B1D48552A0093EAFF /* CFRootViewController.m */,
+				5613E8921D51F6DD00316704 /* CFBaseViewController.h */,
+				5613E8931D51F6DD00316704 /* CFBaseViewController.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -557,6 +562,7 @@
 				56D4BDBF1D4864B40093EAFF /* FMResultSet+HSResultSet.m in Sources */,
 				5648BB4E1D5096F4005E1A74 /* CFAvatarCropViewController.m in Sources */,
 				5648BB381D507D64005E1A74 /* CFApplicationManager.m in Sources */,
+				5613E8941D51F6DD00316704 /* CFBaseViewController.m in Sources */,
 				56D4BDC11D4864B40093EAFF /* HSSql.m in Sources */,
 				562EA83F1D4B0CAE0023D753 /* XWDragCellCollectionView.m in Sources */,
 				56D4BD931D48522B0093EAFF /* UIDevice+EXtension.m in Sources */,

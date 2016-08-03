@@ -41,10 +41,6 @@
     [self initUI];
 }
 
-- (void)popCurrentViewController {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)initUI {
     
     UITextField *name = [UITextField new];

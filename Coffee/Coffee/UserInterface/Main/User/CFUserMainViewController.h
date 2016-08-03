@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CFUserMainViewController : UIViewController
+@interface CFUserMainViewController : CFBaseViewController
 
 @end

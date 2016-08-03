@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CFRootViewController : UIViewController
+@interface CFRootViewController : CFBaseViewController
 
 @end

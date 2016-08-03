@@ -10,6 +10,6 @@
 
 #define kChangeApplicationBK @"kChangeApplicationBK"
 
-@interface CFChangeBKImageViewController : UIViewController
+@interface CFChangeBKImageViewController : CFBaseViewController
 
 @end

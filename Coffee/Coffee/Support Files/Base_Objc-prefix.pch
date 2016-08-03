@@ -1,0 +1,29 @@
+//
+//  HotSail-prefix.pch
+//  HotSail
+//
+//  Created by yangqian on 16/3/14.
+//  Copyright © 2016年 NetEase. All rights reserved.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+
+#import "EXUtilImport.h"
+
+#define HSDevelop
+
+#ifdef HSDevelop
+
+#define NSLog(...) NSLog(__VA_ARGS__)
+#else
+# define NSLog(...) {}
+
+#endif
+
+#endif

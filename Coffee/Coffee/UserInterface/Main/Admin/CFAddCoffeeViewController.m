@@ -110,6 +110,8 @@
     CFAvatarCropViewController *picker = [[CFAvatarCropViewController alloc] init];
     picker.delegate = self;
     [[AppDelegate appDelegate] OrientationMask];
+    picker.navigationBar.tintColor = [UIColor blackColor];
+    [picker.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
     [self presentViewController:picker animated:YES completion:nil];
 }
 

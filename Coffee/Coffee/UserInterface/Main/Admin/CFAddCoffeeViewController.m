@@ -35,20 +35,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"231b13"];
     self.navigationItem.title = @"添加咖啡";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(popCurrentViewController)];
     [self initUI];
+}
+
+- (void)popCurrentViewController {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)initUI {
     
     UITextField *name = [UITextField new];
-    name.placeholder = @"输入咖啡名称";
+    NSDictionary *nameAttributes = @{
+                                     NSFontAttributeName:[UIFont systemFontOfSize:20],
+                                     NSForegroundColorAttributeName: [UIColor whiteColor]
+                                     };
+    name.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"输入咖啡名称" attributes:nameAttributes];
+    name.textColor = [UIColor whiteColor];
     [self.view addSubview:name];
     self.name = name;
     
     UITextField *price = [UITextField new];
-    price.placeholder = @"输入咖啡价格";
+    price.textColor = [UIColor whiteColor];
+    NSDictionary *priceAttributes = @{
+                                      NSFontAttributeName:[UIFont systemFontOfSize:20],
+                                      NSForegroundColorAttributeName: [UIColor whiteColor]
+                                      };
+    price.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"输入咖啡价格" attributes:priceAttributes];
     [self.view addSubview:price];
     self.price = price;
     
@@ -104,6 +119,15 @@
 
 - (void)saveCoffee {
     //造一个URL
+    if (self.name.text.length==0) {
+        [self.view makeToast:@"咖啡名不能为空"];
+        return;
+    }
+    if (self.price.text.length == 0) {
+        [self.view makeToast:@"咖啡价格不能为空"];
+        return;
+    }
+    
     NSString *imageUUID = [NSString stringWithFormat:@"http://www.coffee.com/%@.jpg",[[NSUUID UUID] UUIDString]];
     [[SDWebImageManager sharedManager] saveImageToCache:self.cacheImage forURL:[NSURL URLWithString:imageUUID]];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];

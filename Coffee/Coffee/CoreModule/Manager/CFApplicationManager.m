@@ -17,14 +17,14 @@
 
 + (void)initNavigationBar {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-    //    [UINavigationBar appearance].barTintColor = [UIColor lightGrayColor];
-    //    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"bottom_line"] forBarMetrics:UIBarMetricsCompact];
+    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
     [UINavigationBar appearance].translucent = YES;
-//    NSDictionary *attributes = @{
-//                                 NSFontAttributeName:[UIFont systemFontOfSize:19],
-//                                 NSForegroundColorAttributeName: [UIColor whiteColor]
-//                                 };
-//    [UINavigationBar appearance].titleTextAttributes = attributes;
+    NSDictionary *attributes = @{
+                                 NSFontAttributeName:[UIFont systemFontOfSize:19],
+                                 NSForegroundColorAttributeName: [UIColor whiteColor]
+                                 };
+    [UINavigationBar appearance].titleTextAttributes = attributes;
 }
 
 + (void)initDB {

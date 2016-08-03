@@ -137,19 +137,6 @@
     [_colllectionview reloadData];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bottom_line"] forBarMetrics:UIBarMetricsCompact];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-}
-
-
--(void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-}
-
 - (void)addMore {
     CFAddCoffeeViewController *addVC = [[CFAddCoffeeViewController alloc] initWithIndex:_data.count];
     [self.navigationController pushViewController:addVC animated:YES];

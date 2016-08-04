@@ -56,7 +56,7 @@
     if (self.OriFlag) {
         return UIInterfaceOrientationMaskAll;
     }else{
-        return UIInterfaceOrientationMaskLandscapeRight;
+        return UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationMaskLandscapeLeft;
     }
 }
 

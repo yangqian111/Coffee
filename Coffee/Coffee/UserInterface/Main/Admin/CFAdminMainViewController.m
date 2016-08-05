@@ -17,7 +17,6 @@
 #import "CFAddCoffeeViewController.h"
 
 @interface CFAdminMainViewController ()<XWDragCellCollectionViewDataSource,XWDragCellCollectionViewDelegate,UICollectionViewDelegateFlowLayout>
-
 {
     XWDragCellCollectionView *_colllectionview;
     UIPageControl *_pageControl;

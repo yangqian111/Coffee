@@ -61,7 +61,7 @@
 - (void)configCell:(CFCoffeeModel *)model {
     [self.image sd_setImageWithURL:[NSURL URLWithString:model.avatarURL] placeholderImage:[UIImage imageNamed:@"defaut_coffee"]];
     self.name.text = model.name;
-    self.price.text = model.price;
+    self.price.text = [NSString stringWithFormat:@"￥ %@",model.price];
 }
 
 @end

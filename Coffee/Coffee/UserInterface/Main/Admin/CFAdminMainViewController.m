@@ -120,8 +120,8 @@
         make.centerX.mas_equalTo(_colllectionview);
         make.top.mas_equalTo(_colllectionview.mas_bottom).mas_offset(20);
     }];
-    _pageControl.pageIndicatorTintColor = [UIColor whiteColor];
-    _pageControl.currentPageIndicatorTintColor = [UIColor colorWithHexString:@"422902"];
+    _pageControl.pageIndicatorTintColor = [UIColor colorWithHexString:@"422902"];
+    _pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
     _pageControl.currentPage = 0;
     
     [self config];

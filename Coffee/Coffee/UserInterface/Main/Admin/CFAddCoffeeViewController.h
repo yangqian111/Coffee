@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HSTextView.h"
 
 #define kAddCoffeeSuccess @"kAddCoffeeSuccess"
 

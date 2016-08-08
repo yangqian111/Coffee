@@ -26,12 +26,12 @@
         self.backgroundColor = [UIColor clearColor];
         UIImageView *image = [UIImageView new];
         image.layer.masksToBounds = YES;
-        image.layer.cornerRadius = 50;
+        image.layer.cornerRadius = 75;
         [self.contentView addSubview: image];
         self.image = image;
         [self.image mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.contentView);
-            make.width.height.mas_equalTo(100);
+            make.width.height.mas_equalTo(150);
         }];
         
         UILabel *name=  [UILabel new];
@@ -43,6 +43,7 @@
         [name mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(image);
             make.top.mas_equalTo(image.mas_bottom).mas_offset(5);
+            make.width.mas_lessThanOrEqualTo(170);
         }];
         
         UILabel *price = [UILabel new];
@@ -53,6 +54,7 @@
         [price mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(name);
             make.top.mas_equalTo(name.mas_bottom).mas_offset(7);
+            make.width.mas_lessThanOrEqualTo(170);
         }];
     }
     return self;

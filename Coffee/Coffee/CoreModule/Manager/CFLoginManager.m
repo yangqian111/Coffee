@@ -37,7 +37,7 @@
             NSDictionary *dic = user[0];
             NSString *userName = dic[@"userName"];
             [[CFUserManager manager] initCurrentUser:userName];
-            [EXCallbackHandle notify:@"CFLoginStatusChanged"];
+            [EXCallbackHandle notify:@"CFUserChanged"];
         }
     }];
 }

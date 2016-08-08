@@ -82,7 +82,7 @@
     
     [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(155);
+        make.top.mas_equalTo(100);
     }];
     
     [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,7 +96,6 @@
     
     _colllectionview = [[XWDragCellCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:_layout];
     _colllectionview.backgroundColor = [UIColor clearColor];
-    _colllectionview.contentInset = UIEdgeInsetsMake(0, 20, 0, 0);
     _colllectionview.delegate = self;
     _colllectionview.dataSource = self;
     _colllectionview.shakeLevel = 5.0f;
@@ -105,11 +104,11 @@
     
     [self.view addSubview:_colllectionview];
     [_colllectionview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(172);
-        make.right.mas_equalTo(-172);
-        make.top.mas_equalTo(label2.mas_bottom).mas_offset(36);
-        make.height.mas_equalTo(400);
-        make.width.mas_equalTo(kApplicationWidth-344);
+        make.left.mas_equalTo(47);
+        make.right.mas_equalTo(-37);
+        make.top.mas_equalTo(label2.mas_bottom).mas_offset(40);
+        make.height.mas_equalTo(460);
+        make.width.mas_equalTo(kApplicationWidth-84);
     }];
     
     [_colllectionview registerClass:[CFMainCollectionCellCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
@@ -130,7 +129,7 @@
 - (void)config {
     _countPage = [self numberOfPages];
     _pageControl.numberOfPages = _countPage;
-    _layout.contentSizeWidth = (kApplicationWidth-344)*_countPage;
+    _layout.contentSizeWidth = (kApplicationWidth-74)*_countPage;
     [_colllectionview reloadData];
 }
 
@@ -142,7 +141,7 @@
 - (void)setting {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Coffee" message:@"设置" preferredStyle: UIAlertControllerStyleActionSheet];
     UIAlertAction *archiveAction = [UIAlertAction actionWithTitle:@"切换用户" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[CFLoginManager manager] logout];
+        [EXCallbackHandle notify:@"CFToUser"];
     }];
     UIAlertAction *changeBKImage = [UIAlertAction actionWithTitle:@"设置背景图" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         CFChangeBKImageViewController *vc = [[CFChangeBKImageViewController alloc] init];
@@ -180,14 +179,14 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(130, 180);
+    return CGSizeMake(150, 220);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return 40.f;
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 40.f;
+    return 20.f;
 }
 
 #pragma mark - <XWDragCellCollectionViewDelegate>
@@ -195,7 +194,6 @@
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     CFAddCoffeeViewController *addVC = [[CFAddCoffeeViewController alloc] initWithIndex:_data.count];
     [self.navigationController pushViewController:addVC animated:YES];
-    
 }
 
 - (void)dragCellCollectionView:(XWDragCellCollectionView *)collectionView newDataArrayAfterMove:(NSArray *)newDataArray {
@@ -229,8 +227,8 @@
 // 计算当前页数
 - (NSUInteger)numberOfPages {
     NSUInteger count = self.data.count;
-    NSUInteger countPage = count/8;
-    if (count%8!=0) {
+    NSUInteger countPage = count/10;
+    if (count%10!=0) {
         countPage+=1;
     }
     return countPage;

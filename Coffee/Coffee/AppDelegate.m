@@ -13,8 +13,6 @@
 
 @interface AppDelegate ()
 
-@property (nonatomic,assign) BOOL OriFlag;
-
 @end
 
 @implementation AppDelegate
@@ -50,26 +48,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     
-}
-
--(UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
-    if (self.OriFlag) {
-        return UIInterfaceOrientationMaskAll;
-    }else{
-        return UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationMaskLandscapeLeft;
-    }
-}
-
-+ (AppDelegate *)appDelegate {
-    return (AppDelegate *)[UIApplication sharedApplication].delegate;
-}
-
-- (void)OrientationMask {
-    self.OriFlag = YES;
-}
-
--(void)OrientationMaskBack {
-    self.OriFlag = NO;
 }
 
 @end

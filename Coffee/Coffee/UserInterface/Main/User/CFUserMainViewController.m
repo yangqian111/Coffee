@@ -34,7 +34,6 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bottom_line"] forBarMetrics:UIBarMetricsCompact];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting"] style:UIBarButtonItemStylePlain target:self action:@selector(setting)];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationItem.title = @"咖啡";
     self.view.backgroundColor = [UIColor whiteColor];
     self.view.backgroundColor = [UIColor whiteColor];
     UIImageView *BKImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
@@ -69,7 +68,7 @@
     
     [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(155);
+        make.top.mas_equalTo(100);
     }];
     
     [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -80,7 +79,7 @@
     _countPage = [self numberOfPages];
     
     CFCollectionViewFlowLayout *layout = [CFCollectionViewFlowLayout new];
-    layout.contentSizeWidth = (kApplicationWidth-344)*_countPage;;
+    layout.contentSizeWidth = (kApplicationWidth-74)*_countPage;;
     [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     
     UICollectionView *colllectionview = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
@@ -93,11 +92,11 @@
     _colllectionview.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:_colllectionview];
     [_colllectionview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(172);
-        make.right.mas_equalTo(-172);
-        make.top.mas_equalTo(label2.mas_bottom).mas_offset(36);
-        make.height.mas_equalTo(400);
-        make.width.mas_equalTo(kApplicationWidth-344);
+        make.left.mas_equalTo(47);
+        make.right.mas_equalTo(-37);
+        make.top.mas_equalTo(label2.mas_bottom).mas_offset(40);
+        make.height.mas_equalTo(460);
+        make.width.mas_equalTo(kApplicationWidth-84);
     }];
     [_colllectionview registerClass:[CFMainCollectionCellCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     
@@ -120,13 +119,33 @@
 - (void)setting {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Coffee" message:@"设置" preferredStyle: UIAlertControllerStyleActionSheet];
     UIAlertAction *archiveAction = [UIAlertAction actionWithTitle:@"切换用户" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[CFLoginManager manager] logout];
+        [self willPresentAdminMainViewController];
     }];
     [alertController addAction:archiveAction];
     UIPopoverPresentationController *popVC = [alertController popoverPresentationController];
     popVC.barButtonItem = self.navigationItem.rightBarButtonItem;
     [self presentViewController: alertController animated: YES completion: nil];
 }
+
+- (void)willPresentAdminMainViewController {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"输入管理员密码" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"输入管理员密码";
+    }];
+    UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *string = alert.textFields[0].text;
+        if (![string  isEqualToString:@"admin"]) {
+            [self.view makeToast:@"密码错误"];
+        }else{
+            [EXCallbackHandle notify: @"CFToAdmin"];
+        }
+    }];
+    [alert addAction:cancle];
+    [alert addAction:confirm];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 
 
 #pragma mark UICollectionViewDatasouce
@@ -142,14 +161,14 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(130, 180);
+    return CGSizeMake(150, 220);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return 40.f;
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 40.f;
+    return 20.f;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -160,8 +179,8 @@
 // 计算当前页数
 - (NSUInteger)numberOfPages {
     NSUInteger count = self.data.count;
-    NSUInteger countPage = count/8;
-    if (count%8!=0) {
+    NSUInteger countPage = count/10;
+    if (count%10!=0) {
         countPage+=1;
     }
     return countPage;

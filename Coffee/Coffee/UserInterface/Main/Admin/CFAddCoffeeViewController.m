@@ -20,6 +20,7 @@
 @property (nonatomic,weak) UIButton *saveBtn;
 @property (nonatomic,strong) UIPopoverController *popViewController;
 @property (nonatomic,assign) NSUInteger index;
+@property (nonatomic,strong) UIPopoverController *popover;
 
 @end
 
@@ -107,12 +108,15 @@
 }
 
 - (void)choosePhoto:(UIButton *)sender {
-    CFAvatarCropViewController *picker = [[CFAvatarCropViewController alloc] init];
-    picker.delegate = self;
-    [[AppDelegate appDelegate] OrientationMask];
-    picker.navigationBar.tintColor = [UIColor blackColor];
-    [picker.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
-    [self presentViewController:picker animated:YES completion:nil];
+    CFAvatarCropViewController *imagePicker = [[CFAvatarCropViewController alloc] init];
+    imagePicker.navigationBar.tintColor = [UIColor blackColor];
+    [imagePicker.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
+    imagePicker.delegate = self;
+    imagePicker.view.backgroundColor = [UIColor clearColor];
+    UIPopoverController *popover = [[UIPopoverController alloc]initWithContentViewController:imagePicker];
+    self.popover = popover;
+    popover.passthroughViews = @[self.view];
+    [popover presentPopoverFromRect:self.avatar.bounds inView:self.avatar permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)saveCoffee {
@@ -138,7 +142,7 @@
     [CFDB addCoffee:@[model] finish:^(BOOL success) {
         if (success) {
             [EXCallbackHandle notify:kAddCoffeeSuccess];
-            [self.navigationController popViewControllerAnimated:YES];
+//            [self.navigationController popViewControllerAnimated:YES];
         }
     }];
 }
@@ -149,14 +153,12 @@
     UIImage *compressImage = [[UIImage imageWithData:UIImageJPEGRepresentation([UIImage scaleAndRotateImage:orgImage], 0.1)] copy];
     self.cacheImage = compressImage;
     [self.avatar setImage:self.cacheImage forState:UIControlStateNormal];
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    [[AppDelegate appDelegate] OrientationMaskBack];
+    [self.popover dismissPopoverAnimated:YES];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     NSLog(@"取消了");
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    [[AppDelegate appDelegate] OrientationMaskBack];
+    [self.popover dismissPopoverAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

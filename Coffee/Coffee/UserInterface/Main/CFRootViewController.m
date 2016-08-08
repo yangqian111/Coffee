@@ -7,7 +7,7 @@
 //
 
 #import "CFRootViewController.h"
-#import "CFLoginViewController.h"
+//#import "CFLoginViewController.h"
 #import "CFLoginManager.h"
 #import "CFAdminMainViewController.h"
 #import "CFUserMainViewController.h"
@@ -17,8 +17,6 @@
 
 {
 @private
-    CFAdminMainViewController *_userMainViewController;
-    CFLoginViewController *_loginViewController;
     UIViewController *_currentViewController;
 }
 
@@ -31,7 +29,8 @@
     _currentViewController = [self createCurrentViewController];
     [self.view addSubview:_currentViewController.view];
     [self addChildViewController:_currentViewController];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flipView) name:@"CFLoginStatusChanged" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flipToUserMainViewcontroller) name:@"CFToUser" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flipToAdminViewcontroller) name:@"CFToAdmin" object:nil];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -51,19 +50,14 @@
     
     UIViewController *currentNaviViewController = nil;
     UIViewController *currentViewController = nil;
-    if ([[CFLoginManager manager] isLogin]) {
-        currentViewController = [[CFUserManager manager] isCurrentAdmin] ?[[CFAdminMainViewController alloc] init] :[[CFUserMainViewController alloc] init];
-        currentNaviViewController = [[UINavigationController alloc] initWithRootViewController:currentViewController];
-        return currentNaviViewController;
-    }else{
-        _loginViewController = [[CFLoginViewController alloc] init];
-        currentViewController = _loginViewController;
-        return currentViewController;
-    }
+    currentViewController = [[CFUserMainViewController alloc] init];
+    currentNaviViewController = [[UINavigationController alloc] initWithRootViewController:currentViewController];
+    return currentNaviViewController;
 }
 
-- (void)flipView {
-    UIViewController *nextViewController = [self createCurrentViewController];
+//旋转到用户界面
+- (void)flipToUserMainViewcontroller {
+    UIViewController *nextViewController = [[UINavigationController alloc] initWithRootViewController:[[CFUserMainViewController alloc] init]];
     nextViewController.view.frame = self.view.bounds;
     [self.view insertSubview:nextViewController.view belowSubview:_currentViewController.view];
     [self addChildViewController:nextViewController];
@@ -75,13 +69,25 @@
         [currentViewController.view removeFromSuperview];
         [currentViewController removeFromParentViewController];
     } completion:^(BOOL finished) {
-        if ([[CFLoginManager manager] isLogin]) {
-            _loginViewController = nil;
-        }else{
-            
-        }
         
     }];
 }
 
+//旋转到admin界面
+- (void)flipToAdminViewcontroller {
+    UIViewController *nextViewController = [[UINavigationController alloc] initWithRootViewController:[[CFAdminMainViewController alloc] init]];
+    nextViewController.view.frame = self.view.bounds;
+    [self.view insertSubview:nextViewController.view belowSubview:_currentViewController.view];
+    [self addChildViewController:nextViewController];
+    
+    UIViewController *currentViewController = _currentViewController;
+    _currentViewController = nextViewController;
+    
+    [UIView transitionWithView: self.view duration:1.0 options: UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionFlipFromRight animations:^{
+        [currentViewController.view removeFromSuperview];
+        [currentViewController removeFromParentViewController];
+    } completion:^(BOOL finished) {
+        
+    }];
+}
 @end

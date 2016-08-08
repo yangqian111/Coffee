@@ -12,12 +12,5 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-+ (AppDelegate *)appDelegate;
-
-//支持旋转
--(void)OrientationMask;
-
-//禁止旋转
--(void)OrientationMaskBack;
 @end
 

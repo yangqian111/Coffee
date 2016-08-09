@@ -14,22 +14,32 @@
 #import "CFAddCoffeeViewControllerDescCell.h"
 
 @interface CFAddCoffeeViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource>
-
 {
     UIButton *_tableFootView;
     NSInteger _countRows;
+    NSMutableDictionary *_descDic;
 }
+
+
+@property (nonatomic,strong) UITextField *name;//名称
+@property (nonatomic,strong) UITextField *price;//价格
+@property (nonatomic,strong) UITextField *country;//国家
+@property (nonatomic,strong) UITextField *level;//等级
+@property (nonatomic,strong) UITextField *productArea;//产地
+@property (nonatomic,strong) UITextField *heightLevel;//海拔
+@property (nonatomic,strong) UITextView *flavorDesc;//风味描述
+@property (nonatomic,strong) UIImage *avatarImageCache;
+@property (nonatomic,strong) UIImage *flavorDescImageCache;
+
 
 @property (nonatomic,weak) UITableView *tableView;
 
 @property (nonatomic,strong) NSMutableArray *descViewArr;
 @property (nonatomic,copy) NSString *desc;//简介
 @property (nonatomic,copy) NSString*videoURL;//视频地址
-@property (nonatomic,strong) UIImage *avatarImage;
 @property (nonatomic,weak) UIButton *saveBtn;
-@property (nonatomic,strong) UIPopoverController *popViewController;
 @property (nonatomic,assign) NSUInteger index;
-@property (nonatomic,strong) UIPopoverController *popover;
+
 
 
 @end
@@ -40,8 +50,9 @@
     self = [super init];
     if (self) {
         _index = index;
-        _countRows = 2;
+        _countRows = 1;
         _descViewArr = [NSMutableArray array];
+        _descDic = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -52,7 +63,7 @@
     bk.image = [UIImage imageNamed:@"detail_bk"];
     [self.view addSubview:bk];
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kApplicationWidth, kApplicationHeight-64) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kApplicationWidth, kApplicationHeight-164) style:UITableViewStylePlain];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.estimatedRowHeight = 44.f;
     tableView.rowHeight = UITableViewAutomaticDimension;
@@ -66,7 +77,21 @@
     [self.tableView registerClass:[CFAddCoffeeViewControllerTableViewCell class] forCellReuseIdentifier:@"cellReuser"];
     [self.tableView registerClass:[CFAddCoffeeViewControllerDescCell class] forCellReuseIdentifier:@"descCellReuser"];
     
-    self.view.backgroundColor = [UIColor colorWithHexString:@"231b13"];
+    UIButton *saveBtn = [UIButton new];
+    [saveBtn addTarget:self action:@selector(saveCoffee) forControlEvents:UIControlEventTouchUpInside];
+    [saveBtn setTitle:@"保存" forState:UIControlStateNormal];
+    [saveBtn setBackgroundColor:[UIColor lightGrayColor]];
+    saveBtn.layer.cornerRadius = 10;
+    saveBtn.layer.masksToBounds = YES;
+    [self.view addSubview: saveBtn];
+    self.saveBtn = saveBtn;
+    [saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(-20);
+        make.height.mas_equalTo(50);
+        make.width.mas_equalTo(200);
+    }];
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(popCurrentViewController)];
 }
 
@@ -89,16 +114,30 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         CFAddCoffeeViewControllerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellReuser" forIndexPath:indexPath];
+        self.name = cell.name;
+        self.price = cell.price;
+        self.country = cell.country;
+        self.level =  cell.level;
+        self.productArea = cell.productArea;
+        self.heightLevel = cell.heightLevel;
+        self.flavorDesc = cell.flavorDesc;
+        self.avatarImageCache = cell.avatarImageCache;
+        self.flavorDescImageCache = cell.flavorDescImageCache;
         return cell;
     }else{
         CFAddCoffeeViewControllerDescCell *cell = [tableView dequeueReusableCellWithIdentifier:@"descCellReuser" forIndexPath:indexPath];
+        NSString *key = [NSString stringWithFormat:@"%d--%d",indexPath.section,indexPath.row];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        [dic setObject:cell.desc forKey:@"text"];
+        [dic setObject:cell.descImageView forKey:@"image"];
+        [_descDic setObject:dic forKey:key];
         return cell;
     }
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kApplicationWidth, 50)];
-    [btn setTitle:@"添加模块" forState:UIControlStateNormal];
+    [btn setTitle:@"添加简介" forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20];
     [btn setTitleColor:[UIColor colorWithHexString:@"614A3D"] forState:UIControlStateNormal];
     
@@ -114,7 +153,7 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row != 0 && indexPath.row != 1) {
+    if (indexPath.row != 0) {
         return YES;
     }
     return NO;
@@ -124,62 +163,60 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         _countRows-=1;
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        NSString *key = [NSString stringWithFormat:@"%d--%d",indexPath.section,indexPath.row];
+        [_descDic removeObjectForKey:key];
     }
 }
 
-//- (void)choosePhoto:(UIButton *)sender {
-//    CFAvatarCropViewController *imagePicker = [[CFAvatarCropViewController alloc] init];
-//    imagePicker.navigationBar.tintColor = [UIColor blackColor];
-//    [imagePicker.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
-//    imagePicker.delegate = self;
-//    imagePicker.view.backgroundColor = [UIColor clearColor];
-//    UIPopoverController *popover = [[UIPopoverController alloc]initWithContentViewController:imagePicker];
-//    self.popover = popover;
-//    popover.passthroughViews = @[self.scrollview];
-//    [popover presentPopoverFromRect:self.avatar.bounds inView:self.avatar permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-//}
-//
-//- (void)saveCoffee {
-//    //造一个URL
-//    if (self.name.text.length==0) {
-//        [self.scrollview makeToast:@"咖啡名不能为空"];
-//        return;
-//    }
-//    if (self.price.text.length == 0) {
-//        [self.scrollview makeToast:@"咖啡价格不能为空"];
-//        return;
-//    }
-//
-//    NSString *imageUUID = [NSString stringWithFormat:@"http://www.coffee.com/%@.jpg",[[NSUUID UUID] UUIDString]];
-//    [[SDWebImageManager sharedManager] saveImageToCache:self.avatarImage forURL:[NSURL URLWithString:imageUUID]];
-//    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-//    [dic setObject:[[NSUUID UUID] UUIDString] forKey: @"coffeeId"];
-//    [dic setObject:self.name.text forKey: @"name"];
-//    [dic setObject:self.price.text forKey: @"price"];
-//    [dic setObject:imageUUID forKey: @"avatarURL"];
-//    [dic setObject:@(_index) forKey:@"index"];
-//    CFCoffeeModel *model = [[CFCoffeeModel alloc] initWithDictionary:dic];
-//    [CFDB addCoffee:@[model] finish:^(BOOL success) {
-//        if (success) {
-//            [EXCallbackHandle notify:kAddCoffeeSuccess];
-//            //            [self.navigationController popViewControllerAnimated:YES];
-//        }
-//    }];
-//}
-//
-//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-//    NSLog(@"出来了");
-//    UIImage *orgImage = [info objectForKey:UIImagePickerControllerEditedImage];
-//    UIImage *compressImage = [[UIImage imageWithData:UIImageJPEGRepresentation([UIImage scaleAndRotateImage:orgImage], 0.1)] copy];
-//    self.avatarImage = compressImage;
-//    [self.avatar setImage:self.avatarImage forState:UIControlStateNormal];
-//    [self.popover dismissPopoverAnimated:YES];
-//}
-//
-//- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-//    NSLog(@"取消了");
-//    [self.popover dismissPopoverAnimated:YES];
-//}
+- (void)saveCoffee {
+    
+    if (self.name.text.length == 0 || self.price.text.length == 0) {
+        [self.view makeToast:@"咖啡名或价格不能为空"];
+        return;
+    }
+    NSString *cacheImageUUID = [NSString stringWithFormat:@"http://www.coffee.com/%@.jpg",[[NSUUID UUID] UUIDString]];
+    NSString *flavorDescImageCacheUUID = [NSString stringWithFormat:@"http://www.coffee.com/%@.jpg",[[NSUUID UUID] UUIDString]];
+    UIImage *cacheImage = self.avatarImageCache;
+    UIImage *flavorDescImageCache = self.flavorDescImageCache;
+    [[SDWebImageManager sharedManager] saveImageToCache:flavorDescImageCache forURL:[NSURL URLWithString:flavorDescImageCacheUUID]];
+    [[SDWebImageManager sharedManager] saveImageToCache:cacheImage forURL:[NSURL URLWithString:cacheImageUUID]];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:[[NSUUID UUID] UUIDString] forKey: @"coffeeId"];
+    [dic setObject:self.name.text forKey: @"name"];
+    [dic setObject:self.price.text forKey: @"price"];
+    [dic setObject:cacheImageUUID forKey: @"avatarURL"];
+    [dic setObject:@(_index) forKey:@"index"];
+    [dic setObject:self.country.text forKey: @"country"];
+    [dic setObject:self.productArea.text forKey: @"productArea"];
+    [dic setObject:self.heightLevel.text forKey: @"heightLevel"];
+    [dic setObject:self.level.text forKey: @"level"];
+    [dic setObject:self.flavorDesc.text forKey: @"flavorDesc"];
+    [dic setObject:flavorDescImageCacheUUID forKey: @"flavorDescURL"];
+    
+    NSString *desc = @"";
+    for (NSString *key in _descDic.allKeys) {
+        NSDictionary *dic = _descDic[key];
+        HSTextView *textView = dic[@"text"];
+        if (textView.text.length>0) {
+            desc = [desc stringByAppendingString:textView.text];
+        }
+        UIButton *btn = dic[@"image"];
+        UIImage *image = btn.currentBackgroundImage;
+        NSString *descImageUUID = [NSString stringWithFormat:@"http://www.coffee.com/%@.jpg",[[NSUUID UUID] UUIDString]];
+        [[SDWebImageManager sharedManager] saveImageToCache:image forURL:[NSURL URLWithString:descImageUUID]];
+        desc = [desc stringByAppendingFormat:@"%@\n\t%@\n\t",desc,descImageUUID];
+    }
+    
+    CFCoffeeModel *model = [[CFCoffeeModel alloc] initWithDictionary:dic];
+    [CFDB addCoffee:@[model] finish:^(BOOL success) {
+        if (success) {
+            [EXCallbackHandle notify:kAddCoffeeSuccess];
+            [self.navigationController popViewControllerAnimated:YES];
+            [self.view makeToast:@"添加成功"];
+        }
+    }];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -195,7 +232,8 @@
 
 - (void)addDesc {
     _countRows++;
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_countRows-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_countRows-1 inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     _tableFootView.hidden = YES;
 }
 

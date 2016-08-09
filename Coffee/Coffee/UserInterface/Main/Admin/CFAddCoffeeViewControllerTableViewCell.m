@@ -7,6 +7,14 @@
 //
 
 #import "CFAddCoffeeViewControllerTableViewCell.h"
+#import "CFAvatarCropViewController.h"
+
+@interface CFAddCoffeeViewControllerTableViewCell ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+
+@property (nonatomic,strong) UIPopoverController *popover;
+
+
+@end
 
 @implementation CFAddCoffeeViewControllerTableViewCell
 
@@ -28,10 +36,10 @@
         UIButton *addAvatar = [UIButton new];
         addAvatar.layer.cornerRadius = 65;
         addAvatar.layer.masksToBounds = YES;
-        //        [addAvatar addTarget:self action:@selector(choosePhoto:) forControlEvents:UIControlEventTouchUpInside];
+        [addAvatar addTarget:self action:@selector(choosePhoto:) forControlEvents:UIControlEventTouchUpInside];
         [addAvatar setBackgroundImage:[UIImage imageNamed:@"default_image"] forState:UIControlStateNormal];
         [self.contentView addSubview:addAvatar];
-        self.avatar = addAvatar;
+        self.avatarImage = addAvatar;
         [addAvatar mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(icon.mas_left).mas_offset(-30);
             make.width.height.mas_equalTo(130);
@@ -115,7 +123,7 @@
         
         UILabel *levelLabel = [UILabel new];
         [self.contentView addSubview:levelLabel];
-        levelLabel.text = @"价格:";
+        levelLabel.text = @"等级:";
         levelLabel.textColor = [UIColor colorWithHexString:@"5e544a"];
         levelLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
         
@@ -224,6 +232,36 @@
         }];
     }
     return self;
+}
+
+
+- (void)choosePhoto:(UIButton *)sender {
+    [self.superview.superview endEditing:YES];
+    CFAvatarCropViewController *imagePicker = [[CFAvatarCropViewController alloc] init];
+    imagePicker.navigationBar.tintColor = [UIColor blackColor];
+    [imagePicker.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
+    imagePicker.delegate = self;
+    imagePicker.view.backgroundColor = [UIColor clearColor];
+    UIPopoverController *popover = [[UIPopoverController alloc]initWithContentViewController:imagePicker];
+    self.popover = popover;
+    popover.passthroughViews = @[self.avatarImage];
+    [popover presentPopoverFromRect:self.avatarImage.bounds inView:self.avatarImage permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    NSLog(@"出来了");
+    UIImage *orgImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    UIImage *compressImage = [[UIImage imageWithData:UIImageJPEGRepresentation([UIImage scaleAndRotateImage:orgImage], 0.1)] copy];
+    self.avatarImageCache = compressImage;
+    [self.avatarImage setImage:self.avatarImageCache forState:UIControlStateNormal];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [self.popover dismissPopoverAnimated:YES];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    NSLog(@"取消了");
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [self.popover dismissPopoverAnimated:YES];
 }
 
 

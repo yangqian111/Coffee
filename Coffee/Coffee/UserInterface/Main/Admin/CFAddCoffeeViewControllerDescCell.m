@@ -7,6 +7,14 @@
 //
 
 #import "CFAddCoffeeViewControllerDescCell.h"
+#import "CFAvatarCropViewController.h"
+
+@interface CFAddCoffeeViewControllerDescCell ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+
+@property (nonatomic,strong) UIPopoverController *popover;
+
+
+@end
 
 @implementation CFAddCoffeeViewControllerDescCell
 
@@ -16,12 +24,6 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor clearColor];
         
-        //        UILabel *descLabel = [UILabel new];
-        //        [self.contentView addSubview:descLabel];
-        //        descLabel.text = @"简介:";
-        //        descLabel.textColor = [UIColor colorWithHexString:@"5e544a"];
-        //        descLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
-        //
         HSTextView *desc = [HSTextView new];
         desc.placeholder = @"简介";
         desc.font = [UIFont systemFontOfSize:18];
@@ -36,12 +38,10 @@
             make.top.mas_equalTo(10);
         }];
         
-        //        [descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        //            make.left.mas_equalTo(240);
-        //            make.centerY.mas_equalTo(self.desc);
-        //        }];
-        
         UIButton *descImageView = [UIButton new];
+        descImageView.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        descImageView.layer.masksToBounds = YES;
+        [descImageView addTarget:self action:@selector(choosePhoto:) forControlEvents:UIControlEventTouchUpInside];
         [descImageView setTitle:@"添加图片(图片尺寸建议：1095 * 305)" forState:UIControlStateNormal];
         descImageView.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20];
         [descImageView setTitleColor:[UIColor colorWithHexString:@"614A3D"] forState:UIControlStateNormal];
@@ -53,10 +53,40 @@
             make.top.mas_equalTo(desc.mas_bottom).mas_offset(5);
             make.left.mas_equalTo(desc.mas_left);
             make.right.mas_equalTo(desc.mas_right);
+            make.height.mas_equalTo(200);
             make.bottom.mas_equalTo(self.contentView).mas_offset(-10);
         }];
     }
     return self;
+}
+
+- (void)choosePhoto:(UIButton *)sender {
+    [self.superview.superview endEditing:YES];
+    CFAvatarCropViewController *imagePicker = [[CFAvatarCropViewController alloc] init];
+    imagePicker.navigationBar.tintColor = [UIColor blackColor];
+    [imagePicker.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
+    imagePicker.delegate = self;
+    imagePicker.view.backgroundColor = [UIColor clearColor];
+    UIPopoverController *popover = [[UIPopoverController alloc]initWithContentViewController:imagePicker];
+    self.popover = popover;
+    popover.passthroughViews = @[self.descImageView];
+    [popover presentPopoverFromRect:self.descImageView.bounds inView:self.descImageView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    NSLog(@"出来了");
+    UIImage *orgImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    UIImage *compressImage = [[UIImage imageWithData:UIImageJPEGRepresentation([UIImage scaleAndRotateImage:orgImage], 0.1)] copy];
+    self.descImage = compressImage;
+    [self.descImageView setImage:self.descImage forState:UIControlStateNormal];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [self.popover dismissPopoverAnimated:YES];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    NSLog(@"取消了");
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [self.popover dismissPopoverAnimated:YES];
 }
 
 @end

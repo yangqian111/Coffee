@@ -13,5 +13,6 @@
 
 @property (nonatomic,weak) HSTextView *desc;//风味描述
 @property (nonatomic,weak) UIButton *descImageView;//风味描述图片
+@property (nonatomic,strong) UIImage *descImage;
 
 @end

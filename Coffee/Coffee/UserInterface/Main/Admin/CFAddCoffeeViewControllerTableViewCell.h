@@ -10,7 +10,8 @@
 
 @interface CFAddCoffeeViewControllerTableViewCell : UITableViewCell
 
-@property (nonatomic,weak) UIButton *avatar;
+
+@property (nonatomic,weak) UIButton *avatarImage;
 @property (nonatomic,weak) UITextField *name;//名称
 @property (nonatomic,weak) UITextField *price;//价格
 @property (nonatomic,weak) UITextField *country;//国家
@@ -19,5 +20,7 @@
 @property (nonatomic,weak) UITextField *heightLevel;//海拔
 @property (nonatomic,weak) UITextView *flavorDesc;//风味描述
 @property (nonatomic,weak) UIImageView *flavorDescImageView;//风味描述图片
+@property (nonatomic,strong) UIImage *avatarImageCache;
+@property (nonatomic,strong) UIImage *flavorDescImageCache;
 
 @end

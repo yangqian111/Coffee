@@ -8,7 +8,6 @@
 
 #import "CFMainCollectionCellCollectionViewCell.h"
 #import "CFCoffeeModel.h"
-#import "UIImageView+WebCache.h"
 
 @interface CFMainCollectionCellCollectionViewCell ()
 
@@ -25,6 +24,7 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         UIImageView *image = [UIImageView new];
+        image.backgroundColor = [UIColor whiteColor];
         image.layer.masksToBounds = YES;
         image.layer.cornerRadius = 75;
         [self.contentView addSubview: image];
@@ -61,7 +61,7 @@
 }
 
 - (void)configCell:(CFCoffeeModel *)model {
-    [self.image sd_setImageWithURL:[NSURL URLWithString:model.avatarURL] placeholderImage:[UIImage imageNamed:@"defaut_coffee"]];
+    [self.image sd_setImageWithURL:[NSURL URLWithString:model.avatarURL] placeholderImage:[UIImage imageNamed:@"default_coffee"]];
     self.name.text = model.name;
     self.price.text = [NSString stringWithFormat:@"￥ %@",model.price];
 }

@@ -17,6 +17,8 @@
 		562EA8541D4B38540023D753 /* CFUserMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 562EA84F1D4B38540023D753 /* CFUserMainViewController.m */; };
 		562EA8591D4B41920023D753 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 562EA8581D4B41920023D753 /* AVFoundation.framework */; };
 		562EA85B1D4B43A20023D753 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 562EA85A1D4B43A20023D753 /* AssetsLibrary.framework */; };
+		564722121D59B920004B9923 /* CFUserCoffeeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 564722111D59B920004B9923 /* CFUserCoffeeDetailViewController.m */; };
+		564722151D59B9B7004B9923 /* CFCoffeeDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 564722141D59B9B7004B9923 /* CFCoffeeDetailTableViewCell.m */; };
 		5648BB0A1D5047A3005E1A74 /* CFChangeBKImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5648BB091D5047A3005E1A74 /* CFChangeBKImageViewController.m */; };
 		5648BB271D505152005E1A74 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 5648BB261D505152005E1A74 /* Images */; };
 		5648BB381D507D64005E1A74 /* CFApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5648BB2E1D507D64005E1A74 /* CFApplicationManager.m */; };
@@ -75,6 +77,10 @@
 		562EA8581D4B41920023D753 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		562EA85A1D4B43A20023D753 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		563648EE1D2F845D00353FC4 /* Coffee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coffee.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		564722101D59B920004B9923 /* CFUserCoffeeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFUserCoffeeDetailViewController.h; sourceTree = "<group>"; };
+		564722111D59B920004B9923 /* CFUserCoffeeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFUserCoffeeDetailViewController.m; sourceTree = "<group>"; };
+		564722131D59B9B7004B9923 /* CFCoffeeDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFCoffeeDetailTableViewCell.h; sourceTree = "<group>"; };
+		564722141D59B9B7004B9923 /* CFCoffeeDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFCoffeeDetailTableViewCell.m; sourceTree = "<group>"; };
 		5648BB081D5047A3005E1A74 /* CFChangeBKImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFChangeBKImageViewController.h; sourceTree = "<group>"; };
 		5648BB091D5047A3005E1A74 /* CFChangeBKImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFChangeBKImageViewController.m; sourceTree = "<group>"; };
 		5648BB261D505152005E1A74 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Images; path = ../Images; sourceTree = "<group>"; };
@@ -210,6 +216,10 @@
 			children = (
 				562EA84E1D4B38540023D753 /* CFUserMainViewController.h */,
 				562EA84F1D4B38540023D753 /* CFUserMainViewController.m */,
+				564722101D59B920004B9923 /* CFUserCoffeeDetailViewController.h */,
+				564722111D59B920004B9923 /* CFUserCoffeeDetailViewController.m */,
+				564722131D59B9B7004B9923 /* CFCoffeeDetailTableViewCell.h */,
+				564722141D59B9B7004B9923 /* CFCoffeeDetailTableViewCell.m */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -575,6 +585,7 @@
 				56D4BD981D48522B0093EAFF /* LocalPushCenter.m in Sources */,
 				56D4BD8E1D48522B0093EAFF /* NSDate+EXtension.m in Sources */,
 				5648BB3F1D507D78005E1A74 /* CFCoffeeModel.m in Sources */,
+				564722151D59B9B7004B9923 /* CFCoffeeDetailTableViewCell.m in Sources */,
 				56D4BD971D48522B0093EAFF /* EXFileManager.m in Sources */,
 				562EA8501D4B38540023D753 /* CFAdminMainViewController.m in Sources */,
 				56D4BDBF1D4864B40093EAFF /* FMResultSet+HSResultSet.m in Sources */,
@@ -596,6 +607,7 @@
 				56D4BD871D48522B0093EAFF /* main.m in Sources */,
 				56D4BD911D48522B0093EAFF /* NSString+EXtension.m in Sources */,
 				56D4BDC01D4864B40093EAFF /* CFDBManager.m in Sources */,
+				564722121D59B920004B9923 /* CFUserCoffeeDetailViewController.m in Sources */,
 				5648BB451D50852A005E1A74 /* CFAddCoffeeViewController.m in Sources */,
 				56D4BDB01D48586D0093EAFF /* CFLoginViewController.m in Sources */,
 			);

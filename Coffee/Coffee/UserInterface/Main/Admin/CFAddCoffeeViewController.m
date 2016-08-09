@@ -206,7 +206,7 @@
         [[SDWebImageManager sharedManager] saveImageToCache:image forURL:[NSURL URLWithString:descImageUUID]];
         desc = [desc stringByAppendingFormat:@"%@\n\t%@\n\t",desc,descImageUUID];
     }
-    
+    [dic setObject:desc forKey:@"desc"];
     CFCoffeeModel *model = [[CFCoffeeModel alloc] initWithDictionary:dic];
     [CFDB addCoffee:@[model] finish:^(BOOL success) {
         if (success) {

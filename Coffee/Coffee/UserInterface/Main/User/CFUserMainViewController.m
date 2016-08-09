@@ -13,6 +13,7 @@
 #import "CFCoffeeModel.h"
 #import "CFCollectionViewFlowLayout.h"
 #import "CFThemeManager.h"
+#import "CFUserCoffeeDetailViewController.h"
 
 @interface CFUserMainViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
@@ -158,6 +159,13 @@
     CFMainCollectionCellCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     [cell configCell:self.data[indexPath.row]];
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    CFCoffeeModel *model = _data[indexPath.row];
+    CFUserCoffeeDetailViewController *vc = [[CFUserCoffeeDetailViewController alloc] initWithModel:model];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

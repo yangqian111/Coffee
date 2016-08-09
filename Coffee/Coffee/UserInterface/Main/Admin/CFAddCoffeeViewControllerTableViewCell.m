@@ -173,7 +173,7 @@
         
         UILabel *heightLevelLabel = [UILabel new];
         [self.contentView addSubview:heightLevelLabel];
-        heightLevelLabel.text = @"产地:";
+        heightLevelLabel.text = @"海拔:";
         heightLevelLabel.textColor = [UIColor colorWithHexString:@"5e544a"];
         heightLevelLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
         

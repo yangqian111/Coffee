@@ -9,7 +9,7 @@
 #import "CFAddCoffeeViewControllerDescCell.h"
 #import "CFAvatarCropViewController.h"
 
-@interface CFAddCoffeeViewControllerDescCell ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface CFAddCoffeeViewControllerDescCell ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate>
 
 @property (nonatomic,strong) UIPopoverController *popover;
 
@@ -25,6 +25,7 @@
         self.backgroundColor = [UIColor clearColor];
         
         HSTextView *desc = [HSTextView new];
+        desc.delegate = self;
         desc.placeholder = @"简介";
         desc.font = [UIFont systemFontOfSize:18];
         desc.layer.contents = (id)[UIImage imageNamed:@"biankuang3"].CGImage;
@@ -88,5 +89,11 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
     [self.popover dismissPopoverAnimated:YES];
 }
+
+//-(void)textViewDidEndEditing:(UITextView *)textView {
+//    if (self.cellDelegate respondsToSelector: @selector(finishDescText:)) {
+//
+//    }
+//}
 
 @end

@@ -17,7 +17,7 @@
 {
     UIButton *_tableFootView;
     NSInteger _countRows;
-    NSMutableDictionary *_descDic;
+    NSMutableArray *_descArr;
 }
 
 
@@ -52,7 +52,7 @@
         _index = index;
         _countRows = 1;
         _descViewArr = [NSMutableArray array];
-        _descDic = [NSMutableDictionary dictionary];
+        _descArr = [NSMutableArray array];
     }
     return self;
 }
@@ -108,7 +108,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _countRows;
+    return _descArr.count+1;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -126,8 +126,9 @@
         return cell;
     }else{
         CFAddCoffeeViewControllerDescCell *cell = [tableView dequeueReusableCellWithIdentifier:@"descCellReuser" forIndexPath:indexPath];
-        NSString *key = [NSString stringWithFormat:@"%d--%d",indexPath.section,indexPath.row];
-        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        //        NSString *key = [NSString stringWithFormat:@"%d--%d",indexPath.section,indexPath.row];
+        NSMutableDictionary *dic = _descArr[indexPath.row-1];
+        
         [dic setObject:cell.desc forKey:@"text"];
         [dic setObject:cell.descImageView forKey:@"image"];
         [_descDic setObject:dic forKey:key];

@@ -7,7 +7,7 @@
 //
 
 #import "CFCoffeeDetailTableViewCell.h"
-
+#import "TYAttributedLabel.h"
 
 @interface CFCoffeeDetailTableViewCell ()
 
@@ -20,6 +20,7 @@
 @property (nonatomic,weak) UILabel *heightLevel;
 @property (nonatomic,weak) UILabel *flavorDesc;
 @property (nonatomic,weak) UIImageView *flavorImageView;
+@property (nonatomic,weak) TYAttributedLabel *descLabel;
 
 @end
 
@@ -191,6 +192,17 @@
             make.top.mas_equalTo(heightLevel.mas_bottom).mas_offset(25);
             make.left.mas_equalTo(flavorDescLabel.mas_right).mas_offset(10);
             make.width.mas_equalTo(500);
+            
+        }];
+        
+        TYAttributedLabel *descLabel = [TYAttributedLabel new];
+        descLabel.backgroundColor = [UIColor clearColor];
+        self.descLabel = descLabel;
+        [self.contentView addSubview:descLabel];
+        descLabel.preferredMaxLayoutWidth = 600;
+        [descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(flavorDescLabel);
+            make.top.mas_equalTo(flavorDesc.mas_bottom).mas_offset(20);
             make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(-10);
         }];
     }
@@ -206,6 +218,23 @@
     self.productArea.text = model.productArea;
     self.heightLevel.text = model.heightLevel;
     self.flavorDesc.text = model.flavorDesc;
+    
+    NSString *desc = model.desc;
+    // 分割文本到数组
+    NSArray *textArray = [desc componentsSeparatedByString:@"\n\t"];
+    for (NSString *text in textArray) {
+        if ([text containsString:@"http://"]) {//图片
+            // 追加 图片Url
+            TYImageStorage *imageUrlStorage = [[TYImageStorage alloc]init];
+            imageUrlStorage.imageAlignment = TYImageAlignmentFill;
+            UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:text];
+            imageUrlStorage.image = image;
+            imageUrlStorage.size = CGSizeMake(600, 200);
+            [self.descLabel appendTextStorage:imageUrlStorage];
+        }else{
+            [self.descLabel appendText:text];
+        }
+    }
 }
 
 @end

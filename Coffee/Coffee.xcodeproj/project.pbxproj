@@ -30,6 +30,7 @@
 		5648BB451D50852A005E1A74 /* CFAddCoffeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5648BB441D50852A005E1A74 /* CFAddCoffeeViewController.m */; };
 		5648BB4B1D509087005E1A74 /* UIImagePickerController+CFImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5648BB4A1D509087005E1A74 /* UIImagePickerController+CFImagePicker.m */; };
 		5648BB4E1D5096F4005E1A74 /* CFAvatarCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5648BB4D1D5096F4005E1A74 /* CFAvatarCropViewController.m */; };
+		567734041D5AD4D000DDBA60 /* UITableView+CFEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 567734031D5AD4D000DDBA60 /* UITableView+CFEx.m */; };
 		569288211D58752D00DE8249 /* CFAddCoffeeViewControllerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 569288201D58752D00DE8249 /* CFAddCoffeeViewControllerTableViewCell.m */; };
 		569288241D5879C300DE8249 /* CFAddCoffeeViewControllerDescCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 569288231D5879C300DE8249 /* CFAddCoffeeViewControllerDescCell.m */; };
 		569288271D588DE700DE8249 /* HSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 569288261D588DE700DE8249 /* HSTextView.m */; };
@@ -102,6 +103,8 @@
 		5648BB4A1D509087005E1A74 /* UIImagePickerController+CFImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+CFImagePicker.m"; sourceTree = "<group>"; };
 		5648BB4C1D5096F4005E1A74 /* CFAvatarCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAvatarCropViewController.h; sourceTree = "<group>"; };
 		5648BB4D1D5096F4005E1A74 /* CFAvatarCropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAvatarCropViewController.m; sourceTree = "<group>"; };
+		567734021D5AD4D000DDBA60 /* UITableView+CFEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+CFEx.h"; sourceTree = "<group>"; };
+		567734031D5AD4D000DDBA60 /* UITableView+CFEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+CFEx.m"; sourceTree = "<group>"; };
 		5692881F1D58752D00DE8249 /* CFAddCoffeeViewControllerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAddCoffeeViewControllerTableViewCell.h; sourceTree = "<group>"; };
 		569288201D58752D00DE8249 /* CFAddCoffeeViewControllerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAddCoffeeViewControllerTableViewCell.m; sourceTree = "<group>"; };
 		569288221D5879C300DE8249 /* CFAddCoffeeViewControllerDescCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAddCoffeeViewControllerDescCell.h; sourceTree = "<group>"; };
@@ -368,6 +371,8 @@
 				56D4BD761D48522B0093EAFF /* UIScrollView+EXtention.m */,
 				5648BB491D509087005E1A74 /* UIImagePickerController+CFImagePicker.h */,
 				5648BB4A1D509087005E1A74 /* UIImagePickerController+CFImagePicker.m */,
+				567734021D5AD4D000DDBA60 /* UITableView+CFEx.h */,
+				567734031D5AD4D000DDBA60 /* UITableView+CFEx.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -606,6 +611,7 @@
 				56D4BD9C1D48552A0093EAFF /* CFRootViewController.m in Sources */,
 				56D4BD871D48522B0093EAFF /* main.m in Sources */,
 				56D4BD911D48522B0093EAFF /* NSString+EXtension.m in Sources */,
+				567734041D5AD4D000DDBA60 /* UITableView+CFEx.m in Sources */,
 				56D4BDC01D4864B40093EAFF /* CFDBManager.m in Sources */,
 				564722121D59B920004B9923 /* CFUserCoffeeDetailViewController.m in Sources */,
 				5648BB451D50852A005E1A74 /* CFAddCoffeeViewController.m in Sources */,

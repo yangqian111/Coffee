@@ -30,6 +30,8 @@
 		5648BB451D50852A005E1A74 /* CFAddCoffeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5648BB441D50852A005E1A74 /* CFAddCoffeeViewController.m */; };
 		5648BB4B1D509087005E1A74 /* UIImagePickerController+CFImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5648BB4A1D509087005E1A74 /* UIImagePickerController+CFImagePicker.m */; };
 		5648BB4E1D5096F4005E1A74 /* CFAvatarCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5648BB4D1D5096F4005E1A74 /* CFAvatarCropViewController.m */; };
+		565404C21D61B9CB00BFB0B9 /* CFUpdateCoffeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565404C11D61B9CB00BFB0B9 /* CFUpdateCoffeeViewController.m */; };
+		565404C51D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 565404C41D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.m */; };
 		567734041D5AD4D000DDBA60 /* UITableView+CFEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 567734031D5AD4D000DDBA60 /* UITableView+CFEx.m */; };
 		569288211D58752D00DE8249 /* CFAddCoffeeViewControllerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 569288201D58752D00DE8249 /* CFAddCoffeeViewControllerTableViewCell.m */; };
 		569288241D5879C300DE8249 /* CFAddCoffeeViewControllerDescCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 569288231D5879C300DE8249 /* CFAddCoffeeViewControllerDescCell.m */; };
@@ -103,6 +105,10 @@
 		5648BB4A1D509087005E1A74 /* UIImagePickerController+CFImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+CFImagePicker.m"; sourceTree = "<group>"; };
 		5648BB4C1D5096F4005E1A74 /* CFAvatarCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAvatarCropViewController.h; sourceTree = "<group>"; };
 		5648BB4D1D5096F4005E1A74 /* CFAvatarCropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAvatarCropViewController.m; sourceTree = "<group>"; };
+		565404C01D61B9CB00BFB0B9 /* CFUpdateCoffeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFUpdateCoffeeViewController.h; sourceTree = "<group>"; };
+		565404C11D61B9CB00BFB0B9 /* CFUpdateCoffeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFUpdateCoffeeViewController.m; sourceTree = "<group>"; };
+		565404C31D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFUpdateCoffeeViewControllerDescCell.h; sourceTree = "<group>"; };
+		565404C41D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFUpdateCoffeeViewControllerDescCell.m; sourceTree = "<group>"; };
 		567734021D5AD4D000DDBA60 /* UITableView+CFEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+CFEx.h"; sourceTree = "<group>"; };
 		567734031D5AD4D000DDBA60 /* UITableView+CFEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+CFEx.m"; sourceTree = "<group>"; };
 		5692881F1D58752D00DE8249 /* CFAddCoffeeViewControllerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAddCoffeeViewControllerTableViewCell.h; sourceTree = "<group>"; };
@@ -199,6 +205,10 @@
 				569288201D58752D00DE8249 /* CFAddCoffeeViewControllerTableViewCell.m */,
 				569288221D5879C300DE8249 /* CFAddCoffeeViewControllerDescCell.h */,
 				569288231D5879C300DE8249 /* CFAddCoffeeViewControllerDescCell.m */,
+				565404C01D61B9CB00BFB0B9 /* CFUpdateCoffeeViewController.h */,
+				565404C11D61B9CB00BFB0B9 /* CFUpdateCoffeeViewController.m */,
+				565404C31D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.h */,
+				565404C41D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.m */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -456,12 +466,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 563649051D2F845E00353FC4 /* Build configuration list for PBXNativeTarget "Coffee" */;
 			buildPhases = (
+				F10EBBF10E5BCDA923C9D916 /* [CP] Check Pods Manifest.lock */,
 				B77FDB67CC228B6704B5DB32 /* 📦 Check Pods Manifest.lock */,
 				563648EA1D2F845D00353FC4 /* Sources */,
 				563648EB1D2F845D00353FC4 /* Frameworks */,
 				563648EC1D2F845D00353FC4 /* Resources */,
-				EBD42DCEE8869B3110ECDB51 /* 📦 Embed Pods Frameworks */,
-				FDC0545CE2192FC9AB35BC75 /* 📦 Copy Pods Resources */,
+				EBD42DCEE8869B3110ECDB51 /* [CP] Embed Pods Frameworks */,
+				FDC0545CE2192FC9AB35BC75 /* [CP] Copy Pods Resources */,
+				286CD397D400ACC0504914A1 /* Embed Pods Frameworks */,
+				39FFF7850FCA57F947F85F93 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -520,6 +533,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		286CD397D400ACC0504914A1 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-Coffee/Pods-Coffee-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		39FFF7850FCA57F947F85F93 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-Coffee/Pods-Coffee-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B77FDB67CC228B6704B5DB32 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -535,14 +578,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		EBD42DCEE8869B3110ECDB51 /* 📦 Embed Pods Frameworks */ = {
+		EBD42DCEE8869B3110ECDB51 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,14 +593,29 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-Coffee/Pods-Coffee-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FDC0545CE2192FC9AB35BC75 /* 📦 Copy Pods Resources */ = {
+		F10EBBF10E5BCDA923C9D916 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FDC0545CE2192FC9AB35BC75 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -587,12 +645,14 @@
 				56D4BD951D48522B0093EAFF /* UIScrollView+EXtention.m in Sources */,
 				56D4BD991D48522B0093EAFF /* NSStringValidation.m in Sources */,
 				5648BB391D507D64005E1A74 /* CFLoginManager.m in Sources */,
+				565404C51D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.m in Sources */,
 				56D4BD981D48522B0093EAFF /* LocalPushCenter.m in Sources */,
 				56D4BD8E1D48522B0093EAFF /* NSDate+EXtension.m in Sources */,
 				5648BB3F1D507D78005E1A74 /* CFCoffeeModel.m in Sources */,
 				564722151D59B9B7004B9923 /* CFCoffeeDetailTableViewCell.m in Sources */,
 				56D4BD971D48522B0093EAFF /* EXFileManager.m in Sources */,
 				562EA8501D4B38540023D753 /* CFAdminMainViewController.m in Sources */,
+				565404C21D61B9CB00BFB0B9 /* CFUpdateCoffeeViewController.m in Sources */,
 				56D4BDBF1D4864B40093EAFF /* FMResultSet+HSResultSet.m in Sources */,
 				5648BB4E1D5096F4005E1A74 /* CFAvatarCropViewController.m in Sources */,
 				5648BB381D507D64005E1A74 /* CFApplicationManager.m in Sources */,

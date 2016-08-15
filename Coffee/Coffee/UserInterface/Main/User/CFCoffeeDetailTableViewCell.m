@@ -66,6 +66,8 @@
         }];
         
         UILabel *name = [UILabel new];
+        name.textColor = [UIColor colorWithHexString:@"676561"];
+        name.font  = [UIFont systemFontOfSize:16];
         [self.contentView addSubview:name];
         self.name = name;
         
@@ -87,6 +89,8 @@
         
         UILabel *price = [UILabel new];
         [self.contentView addSubview:price];
+        price.textColor = [UIColor colorWithHexString:@"676561"];
+        price.font  = [UIFont systemFontOfSize:16];
         self.price = price;
         [price mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(nameLabel);
@@ -105,6 +109,8 @@
         }];
         
         UILabel *country = [UILabel new];
+        country.textColor = [UIColor colorWithHexString:@"676561"];
+        country.font  = [UIFont systemFontOfSize:16];
         [self.contentView addSubview:country];
         self.country = country;
         
@@ -125,7 +131,8 @@
         }];
         
         UILabel *level = [UILabel new];
-        level.text = @"1111";
+        level.textColor = [UIColor colorWithHexString:@"676561"];
+        level.font  = [UIFont systemFontOfSize:16];
         [self.contentView addSubview:level];
         self.level = level;
         [level mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -145,6 +152,8 @@
         }];
         
         UILabel *productArea = [UILabel new];
+        productArea.textColor = [UIColor colorWithHexString:@"676561"];
+        productArea.font  = [UIFont systemFontOfSize:16];
         [self.contentView addSubview:productArea];
         self.productArea = productArea;
         [productArea mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -165,6 +174,8 @@
         }];
         
         UILabel *heightLevel = [UILabel new];
+        heightLevel.textColor = [UIColor colorWithHexString:@"676561"];
+        heightLevel.font  = [UIFont systemFontOfSize:16];
         [self.contentView addSubview:heightLevel];
         self.heightLevel = heightLevel;
         [heightLevel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -184,6 +195,8 @@
         }];
         
         UILabel *flavorDesc = [UILabel new];
+        flavorDesc.textColor = [UIColor colorWithHexString:@"676561"];
+        flavorDesc.font  = [UIFont systemFontOfSize:16];
         flavorDesc.lineBreakMode = NSLineBreakByCharWrapping;
         flavorDesc.numberOfLines = 0;
         self.flavorDesc = flavorDesc;
@@ -196,6 +209,9 @@
         }];
         
         TYAttributedLabel *descLabel = [TYAttributedLabel new];
+        descLabel.linesSpacing = 15.f;
+        descLabel.font = [UIFont systemFontOfSize:16];
+        descLabel.textColor = [UIColor colorWithHexString:@"676561"];
         descLabel.backgroundColor = [UIColor clearColor];
         self.descLabel = descLabel;
         [self.contentView addSubview:descLabel];

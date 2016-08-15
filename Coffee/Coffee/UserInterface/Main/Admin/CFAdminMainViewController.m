@@ -15,6 +15,7 @@
 #import "CFThemeManager.h"
 #import "CFChangeBKImageViewController.h"
 #import "CFAddCoffeeViewController.h"
+#import "CFUpdateCoffeeViewController.h"
 
 @interface CFAdminMainViewController ()<XWDragCellCollectionViewDataSource,XWDragCellCollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 {
@@ -192,7 +193,8 @@
 #pragma mark - <XWDragCellCollectionViewDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    CFAddCoffeeViewController *addVC = [[CFAddCoffeeViewController alloc] initWithIndex:_data.count];
+    CFCoffeeModel *coffee = self.data[indexPath.row];
+    CFUpdateCoffeeViewController *addVC = [[CFUpdateCoffeeViewController alloc] initWithCoffee:coffee];
     [self.navigationController pushViewController:addVC animated:YES];
 }
 

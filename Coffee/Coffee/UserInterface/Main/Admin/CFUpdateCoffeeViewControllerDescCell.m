@@ -1,15 +1,15 @@
 //
-//  CFAddCoffeeViewControllerDescCell.m
+//  CFUpdateCoffeeViewControllerDescCell.m
 //  Coffee
 //
-//  Created by 羊谦 on 16/8/8.
+//  Created by yangqian on 16/8/15.
 //  Copyright © 2016年 yangqian. All rights reserved.
 //
 
-#import "CFAddCoffeeViewControllerDescCell.h"
+#import "CFUpdateCoffeeViewControllerDescCell.h"
 #import "CFAvatarCropViewController.h"
 
-@interface CFAddCoffeeViewControllerDescCell ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate>
+@interface CFUpdateCoffeeViewControllerDescCell ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate>
 
 @property (nonatomic,strong) UIPopoverController *popover;
 @property (nonatomic,weak) HSTextView *desc;//简述
@@ -17,7 +17,8 @@
 
 @end
 
-@implementation CFAddCoffeeViewControllerDescCell
+@implementation CFUpdateCoffeeViewControllerDescCell
+
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -117,5 +118,4 @@
         [self.cellDelegate finishDescText:textView.text index:self.index];
     }
 }
-
 @end

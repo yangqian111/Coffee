@@ -1,25 +1,27 @@
 //
-//  CFAddCoffeeViewController.m
+//  CFUpdateCoffeeViewController.m
 //  Coffee
 //
-//  Created by 羊谦 on 16/8/2.
+//  Created by yangqian on 16/8/15.
 //  Copyright © 2016年 yangqian. All rights reserved.
 //
 
-#import "CFAddCoffeeViewController.h"
+#import "CFUpdateCoffeeViewController.h"
 #import "AppDelegate.h"
 #import "SDWebImageManager.h"
 #import "CFAvatarCropViewController.h"
 #import "CFAddCoffeeViewControllerTableViewCell.h"
 #import "CFAddCoffeeViewControllerDescCell.h"
+#import "UIButton+WebCache.h"
+#import "CFUpdateCoffeeViewControllerDescCell.h"
 
-@interface CFAddCoffeeViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CFAddCoffeeViewControllerDescCellDelegate>
+@interface CFUpdateCoffeeViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CFUpdateCoffeeViewControllerDescCellDelegate>
 {
     UIButton *_tableFootView;
     NSInteger _countRows;
     NSMutableArray *_descArr;
+    BOOL _isFirst;
 }
-
 
 @property (nonatomic,strong) UITextField *name;//名称
 @property (nonatomic,strong) UITextField *price;//价格
@@ -27,7 +29,7 @@
 @property (nonatomic,strong) UITextField *level;//等级
 @property (nonatomic,strong) UITextField *productArea;//产地
 @property (nonatomic,strong) UITextField *heightLevel;//海拔
-@property (nonatomic,strong) UITextView *flavorDesc;//风味描述
+@property (nonatomic,strong) UITextView *flavorDesc;//风味
 @property (nonatomic,strong) UIImage *avatarImageCache;
 @property (nonatomic,strong) UIImage *flavorDescImageCache;
 
@@ -38,22 +40,38 @@
 @property (nonatomic,weak) UIButton *saveBtn;
 @property (nonatomic,assign) NSUInteger index;
 
+@property (nonatomic,strong) CFCoffeeModel *coffee;
+
 @end
 
-@implementation CFAddCoffeeViewController
+@implementation CFUpdateCoffeeViewController
 
-- (instancetype)initWithIndex:(NSUInteger)index {
+- (instancetype)initWithCoffee:(CFCoffeeModel *)coffee {
     self = [super init];
     if (self) {
-        _index = index;
-        _countRows = 1;
         _descArr = [NSMutableArray array];
+        _isFirst = YES;
+        _coffee = coffee;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSString *desc = _coffee.desc;
+    // 分割文本到数组
+    NSArray *textArray = [desc componentsSeparatedByString:@"\n\t"];
+    for (NSString *s in textArray) {
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        if ([s containsString:@"http://"]) {
+            UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:s];
+            [dic setObject:image forKey:@"image"];
+        }else{
+            [dic setObject:s forKey:@"text"];
+        }
+        [_descArr addObject:dic];
+    }
+    
     UIImageView *bk = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kApplicationWidth, kApplicationHeight)];
     bk.image = [UIImage imageNamed:@"detail_bk"];
     [self.view addSubview:bk];
@@ -62,7 +80,6 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.estimatedRowHeight = 44.f;
     tableView.rowHeight = UITableViewAutomaticDimension;
-    //    tableView.tableFooterView = [UIView new];
     tableView.backgroundColor = [UIColor clearColor];
     tableView.delegate = self;
     tableView.dataSource = self;
@@ -118,9 +135,20 @@
         self.flavorDesc = cell.flavorDesc;
         self.avatarImageCache = cell.avatarImageCache;
         self.flavorDescImageCache = cell.flavorDescImageCache;
+        if (_isFirst) {
+            cell.name.text = _coffee.name;
+            cell.price.text = _coffee.price;
+            cell.country.text = _coffee.country;
+            cell.level.text = _coffee.level;
+            cell.productArea.text = _coffee.productArea;
+            cell.heightLevel.text = _coffee.heightLevel;
+            cell.flavorDesc.text = _coffee.flavorDesc;
+            [cell.avatarImage sd_setImageWithURL:[NSURL URLWithString:_coffee.avatarURL] forState: UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_image"]];
+            _isFirst = NO;
+        }
         return cell;
     }else{
-        CFAddCoffeeViewControllerDescCell *cell = [tableView dequeueReusableCellWithIdentifier:@"descCellReuser" forIndexPath:indexPath];
+        CFUpdateCoffeeViewControllerDescCell *cell = [tableView dequeueReusableCellWithIdentifier:@"descCellReuser" forIndexPath:indexPath];
         cell.index = indexPath.row - 1;
         cell.cellDelegate = self;
         [cell configCell: _descArr[indexPath.row-1]];
@@ -156,7 +184,6 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [_descArr removeObjectAtIndex:indexPath.row - 1];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        //        [tableView reloadData];
     }
 }
 
@@ -203,7 +230,7 @@
     CFCoffeeModel *model = [[CFCoffeeModel alloc] initWithDictionary:dic];
     [CFDB addCoffee:@[model] finish:^(BOOL success) {
         if (success) {
-            [EXCallbackHandle notify:kAddCoffeeSuccess];
+            [EXCallbackHandle notify:kUpdateCoffeeSuccess];
             [self.navigationController popViewControllerAnimated:YES];
             [self.view makeToast:@"添加成功"];
         }

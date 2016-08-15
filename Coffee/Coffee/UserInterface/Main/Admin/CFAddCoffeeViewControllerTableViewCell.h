@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIButton+WebCache.h"
 
 @interface CFAddCoffeeViewControllerTableViewCell : UITableViewCell
 

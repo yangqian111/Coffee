@@ -46,6 +46,7 @@
     [self.view addSubview:BKImageView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCollection) name:kAddCoffeeSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCollection) name:kUpdateCoffeeSuccess object:nil];
 }
 
 //添加完咖啡 重载collection

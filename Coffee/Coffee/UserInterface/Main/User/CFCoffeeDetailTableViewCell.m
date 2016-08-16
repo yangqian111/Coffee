@@ -202,7 +202,7 @@
         self.flavorDesc = flavorDesc;
         [self.contentView addSubview:flavorDesc];
         [flavorDesc mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(heightLevel.mas_bottom).mas_offset(25);
+            make.centerY.mas_equalTo(flavorDescLabel);
             make.left.mas_equalTo(flavorDescLabel.mas_right).mas_offset(10);
             make.width.mas_equalTo(500);
             

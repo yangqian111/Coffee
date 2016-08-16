@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class CFCoffeeModel;
-@interface CFUserCoffeeDetailViewController : UIViewController
+@interface CFUserCoffeeDetailViewController : CFBaseViewController
 
 -(instancetype)initWithModel:(CFCoffeeModel *)model;
 

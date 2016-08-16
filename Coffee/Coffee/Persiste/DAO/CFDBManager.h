@@ -25,5 +25,6 @@
 - (void)addCoffee:(NSArray *)coffees finish:(void (^)(BOOL success))finishBlock;
 - (void)getAllCoffee:(void (^)(BOOL succee,NSArray *coffees))finishBlock;
 - (void)updateCoffee:(NSArray *)coffees finish:(void (^)(BOOL success))finishBlock;
+- (void)deleteCoffee:(NSString *)coffeeId finish:(void (^)(BOOL success))finishBlock;
 
 @end

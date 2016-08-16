@@ -44,6 +44,7 @@
     self.tableView = tableView;
     [self.tableView registerClass:[CFCoffeeDetailTableViewCell class] forCellReuseIdentifier:@"cellReuser"];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(popCurrentViewController)];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

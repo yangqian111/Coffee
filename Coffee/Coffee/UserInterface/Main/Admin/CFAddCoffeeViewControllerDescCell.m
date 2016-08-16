@@ -96,7 +96,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     NSLog(@"出来了");
     UIImage *orgImage = [info objectForKey:UIImagePickerControllerEditedImage];
-    UIImage *compressImage = [[UIImage imageWithData:UIImageJPEGRepresentation([UIImage scaleAndRotateImage:orgImage], 0.1)] copy];
+    UIImage *compressImage = [[UIImage imageWithData:UIImageJPEGRepresentation([UIImage scaleAndRotateImage:orgImage], 0.5)] copy];
     [self.descImageView setBackgroundImage:compressImage forState:UIControlStateNormal];
     [_descImageView setTitle:@"" forState:UIControlStateNormal];
     if ([self.cellDelegate respondsToSelector:@selector(finishDescImage:index:)]) {

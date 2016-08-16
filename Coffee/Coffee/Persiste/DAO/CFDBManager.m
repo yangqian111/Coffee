@@ -217,4 +217,22 @@
     });
 }
 
+-(void)deleteCoffee:(NSString *)coffeeId finish:(void (^)(BOOL))finishBlock {
+    if (coffeeId.length == 0) {
+        [EXCallbackHandle callBackSuccess:finishBlock success:YES];
+        return;
+    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        __block BOOL success = NO;
+        NSString *coffeeIdCopy = [coffeeId copy];
+        [self.dbQueue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+            NSString *sql = [HSSql sqlForDeleteCoffee];
+            [db executeUpdate: sql,coffeeIdCopy];
+            success = ![db hadError];
+        }];
+        [EXCallbackHandle callBackSuccess:finishBlock success:success];
+    });
+    
+}
+
 @end

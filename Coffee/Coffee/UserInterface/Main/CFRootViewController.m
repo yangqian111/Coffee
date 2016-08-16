@@ -19,7 +19,6 @@
 @private
     UIViewController *_currentViewController;
 }
-
 @end
 
 @implementation CFRootViewController
@@ -50,7 +49,7 @@
     
     UIViewController *currentNaviViewController = nil;
     UIViewController *currentViewController = nil;
-    currentViewController = [[CFAdminMainViewController alloc] init];
+    currentViewController = [[CFUserMainViewController alloc] init];
     currentNaviViewController = [[UINavigationController alloc] initWithRootViewController:currentViewController];
     return currentNaviViewController;
 }
@@ -69,7 +68,6 @@
         [currentViewController.view removeFromSuperview];
         [currentViewController removeFromParentViewController];
     } completion:^(BOOL finished) {
-        
     }];
 }
 
@@ -79,10 +77,8 @@
     nextViewController.view.frame = self.view.bounds;
     [self.view insertSubview:nextViewController.view belowSubview:_currentViewController.view];
     [self addChildViewController:nextViewController];
-    
     UIViewController *currentViewController = _currentViewController;
     _currentViewController = nextViewController;
-    
     [UIView transitionWithView: self.view duration:1.0 options: UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionTransitionFlipFromRight animations:^{
         [currentViewController.view removeFromSuperview];
         [currentViewController removeFromParentViewController];

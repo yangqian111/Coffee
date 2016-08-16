@@ -38,6 +38,7 @@
 @property (nonatomic,copy) NSString *desc;//简介
 @property (nonatomic,copy) NSString*videoURL;//视频地址
 @property (nonatomic,weak) UIButton *saveBtn;
+@property (nonatomic,weak) UIButton *deleteBtn;
 @property (nonatomic,assign) NSUInteger index;
 
 @property (nonatomic,strong) CFCoffeeModel *coffee;
@@ -98,11 +99,27 @@
     [self.view addSubview: saveBtn];
     self.saveBtn = saveBtn;
     [saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view);
+        make.left.mas_equalTo((kApplicationWidth-500)/2);
         make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(-20);
         make.height.mas_equalTo(50);
         make.width.mas_equalTo(200);
     }];
+    
+    UIButton *deleteBtn = [UIButton new];
+    [deleteBtn addTarget:self action:@selector(deleteCoffee) forControlEvents:UIControlEventTouchUpInside];
+    [deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
+    [deleteBtn setBackgroundColor:[UIColor lightGrayColor]];
+    deleteBtn.layer.cornerRadius = 10;
+    deleteBtn.layer.masksToBounds = YES;
+    [self.view addSubview: deleteBtn];
+    self.deleteBtn = deleteBtn;
+    [deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(saveBtn.mas_right).mas_offset(100);
+        make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(-20);
+        make.height.mas_equalTo(50);
+        make.width.mas_equalTo(200);
+    }];
+    
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(popCurrentViewController)];
 }
@@ -187,8 +204,24 @@
     }
 }
 
+- (void)deleteCoffee {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定删除吗？" message:@"删除不可恢复" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [CFDB deleteCoffee:_coffee.coffeeId finish:^(BOOL success) {
+            if (success) {
+                [EXCallbackHandle notify:kUpdateCoffeeSuccess];
+                [self popCurrentViewController];
+            }
+					   }];
+    }];
+    [alert addAction:action];
+    [alert addAction:confirm];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 - (void)saveCoffee {
-    
     if (self.name.text.length == 0 || self.price.text.length == 0) {
         [self.view makeToast:@"咖啡名或价格不能为空"];
         return;
@@ -200,11 +233,10 @@
     [[SDWebImageManager sharedManager] saveImageToCache:flavorDescImageCache forURL:[NSURL URLWithString:flavorDescImageCacheUUID]];
     [[SDWebImageManager sharedManager] saveImageToCache:cacheImage forURL:[NSURL URLWithString:cacheImageUUID]];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setObject:[[NSUUID UUID] UUIDString] forKey: @"coffeeId"];
+    [dic setObject:_coffee.coffeeId forKey: @"coffeeId"];
     [dic setObject:self.name.text forKey: @"name"];
     [dic setObject:self.price.text forKey: @"price"];
     [dic setObject:cacheImageUUID forKey: @"avatarURL"];
-    [dic setObject:@(_index) forKey:@"index"];
     [dic setObject:self.country.text forKey: @"country"];
     [dic setObject:self.productArea.text forKey: @"productArea"];
     [dic setObject:self.heightLevel.text forKey: @"heightLevel"];
@@ -222,13 +254,12 @@
         if (descImage) {
             NSString *descImageUUID = [NSString stringWithFormat:@"http://www.coffee.com/%@.jpg",[[NSUUID UUID] UUIDString]];
             [[SDWebImageManager sharedManager] saveImageToCache:descImage forURL:[NSURL URLWithString:descImageUUID]];
-            //            desc = [desc stringByAppendingFormat:@"%@\n\t%@\n\t",desc,descImageUUID];
             desc = [NSString stringWithFormat:@"%@\n\t%@\n\t",desc,descImageUUID];
         }
     }
     [dic setObject:desc forKey:@"desc"];
     CFCoffeeModel *model = [[CFCoffeeModel alloc] initWithDictionary:dic];
-    [CFDB addCoffee:@[model] finish:^(BOOL success) {
+    [CFDB updateCoffee:@[model] finish:^(BOOL success) {
         if (success) {
             [EXCallbackHandle notify:kUpdateCoffeeSuccess];
             [self.navigationController popViewControllerAnimated:YES];

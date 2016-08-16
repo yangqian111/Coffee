@@ -20,7 +20,6 @@
 @property (nonatomic,weak) UITextField *productArea;//产地
 @property (nonatomic,weak) UITextField *heightLevel;//海拔
 @property (nonatomic,weak) UITextView *flavorDesc;//风味描述
-@property (nonatomic,weak) UIImageView *flavorDescImageView;//风味描述图片
 @property (nonatomic,strong) UIImage *avatarImageCache;
 @property (nonatomic,strong) UIImage *flavorDescImageCache;
 

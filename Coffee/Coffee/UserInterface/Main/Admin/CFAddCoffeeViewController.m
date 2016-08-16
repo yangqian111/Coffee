@@ -16,7 +16,6 @@
 @interface CFAddCoffeeViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CFAddCoffeeViewControllerDescCellDelegate>
 {
     UIButton *_tableFootView;
-    NSInteger _countRows;
     NSMutableArray *_descArr;
 }
 
@@ -46,7 +45,6 @@
     self = [super init];
     if (self) {
         _index = index;
-        _countRows = 1;
         _descArr = [NSMutableArray array];
     }
     return self;
@@ -137,7 +135,7 @@
     [btn setBackgroundImage:[UIImage imageNamed:@"kuang9"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(addDesc) forControlEvents:UIControlEventTouchUpInside];
     _tableFootView = btn;
-    _tableFootView.hidden = YES;
+    //    _tableFootView.hidden = YES;
     return btn;
 }
 
@@ -195,7 +193,6 @@
         if (descImage) {
             NSString *descImageUUID = [NSString stringWithFormat:@"http://www.coffee.com/%@.jpg",[[NSUUID UUID] UUIDString]];
             [[SDWebImageManager sharedManager] saveImageToCache:descImage forURL:[NSURL URLWithString:descImageUUID]];
-            //            desc = [desc stringByAppendingFormat:@"%@\n\t%@\n\t",desc,descImageUUID];
             desc = [NSString stringWithFormat:@"%@\n\t%@\n\t",desc,descImageUUID];
         }
     }
@@ -215,11 +212,11 @@
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView.contentOffset.y == scrollView.contentSize.height - scrollView.frame.size.height) {
-        _tableFootView.hidden = NO;
-    }else{
-        _tableFootView.hidden =  YES;
-    }
+    //    if (scrollView.contentOffset.y == scrollView.contentSize.height - scrollView.frame.size.height) {
+    //        _tableFootView.hidden = NO;
+    //    }else{
+    //        _tableFootView.hidden =  YES;
+    //    }
 }
 
 - (void)addDesc {

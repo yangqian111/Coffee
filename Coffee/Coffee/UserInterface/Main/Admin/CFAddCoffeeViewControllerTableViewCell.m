@@ -218,18 +218,19 @@
         [flavorDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(addAvatar);
             make.centerY.mas_equalTo(self.flavorDesc);
+            make.bottom.mas_equalTo(self.contentView).mas_offset(-40);
         }];
         
-        UIImageView *flavorDescImageView =  [UIImageView new];
-        flavorDescImageView.image = [UIImage imageNamed:@"flavorDescImage"];
-        [self.contentView addSubview:flavorDescImageView];
-        self.flavorDescImageView = flavorDescImageView;
-        [flavorDescImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(self.contentView);
-            make.bottom.mas_equalTo(self.contentView).mas_offset(-40);
-            make.width.mas_equalTo(240);
-            make.top.mas_equalTo(flavorDesc.mas_bottom).mas_offset(20);
-        }];
+        //        UIImageView *flavorDescImageView =  [UIImageView new];
+        //        flavorDescImageView.image = [UIImage imageNamed:@"flavorDescImage"];
+        //        [self.contentView addSubview:flavorDescImageView];
+        //        self.flavorDescImageView = flavorDescImageView;
+        //        [flavorDescImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        //            make.centerX.mas_equalTo(self.contentView);
+        //            make.bottom.mas_equalTo(self.contentView).mas_offset(-40);
+        //            make.width.mas_equalTo(240);
+        //            make.top.mas_equalTo(flavorDesc.mas_bottom).mas_offset(20);
+        //        }];
     }
     return self;
 }

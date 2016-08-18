@@ -19,4 +19,8 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)dismissCurrentViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end

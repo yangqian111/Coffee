@@ -11,7 +11,7 @@
 #import "SDWebImageManager.h"
 #import "CFAvatarCropViewController.h"
 #import "CFAddCoffeeViewControllerTableViewCell.h"
-#import "CFAddCoffeeViewControllerDescCell.h"
+#import "CFAddCoffeeViewControllerDescTextCell.h"
 #import "UIButton+WebCache.h"
 #import "CFUpdateCoffeeViewControllerDescCell.h"
 
@@ -88,7 +88,7 @@
     self.tableView = tableView;
     
     [self.tableView registerClass:[CFAddCoffeeViewControllerTableViewCell class] forCellReuseIdentifier:@"cellReuser"];
-    [self.tableView registerClass:[CFAddCoffeeViewControllerDescCell class] forCellReuseIdentifier:@"descCellReuser"];
+    [self.tableView registerClass:[CFAddCoffeeViewControllerDescTextCell class] forCellReuseIdentifier:@"CFAddCoffeeViewControllerDescTextCell"];
     
     UIButton *saveBtn = [UIButton new];
     [saveBtn addTarget:self action:@selector(saveCoffee) forControlEvents:UIControlEventTouchUpInside];

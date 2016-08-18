@@ -27,15 +27,18 @@
 		5648BB3B1D507D64005E1A74 /* CFUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5648BB341D507D64005E1A74 /* CFUserManager.m */; };
 		5648BB3C1D507D64005E1A74 /* CFVideoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5648BB361D507D64005E1A74 /* CFVideoManager.m */; };
 		5648BB3F1D507D78005E1A74 /* CFCoffeeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5648BB3E1D507D78005E1A74 /* CFCoffeeModel.m */; };
-		5648BB451D50852A005E1A74 /* CFAddCoffeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5648BB441D50852A005E1A74 /* CFAddCoffeeViewController.m */; };
 		5648BB4B1D509087005E1A74 /* UIImagePickerController+CFImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 5648BB4A1D509087005E1A74 /* UIImagePickerController+CFImagePicker.m */; };
 		5648BB4E1D5096F4005E1A74 /* CFAvatarCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5648BB4D1D5096F4005E1A74 /* CFAvatarCropViewController.m */; };
 		565404C21D61B9CB00BFB0B9 /* CFUpdateCoffeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565404C11D61B9CB00BFB0B9 /* CFUpdateCoffeeViewController.m */; };
 		565404C51D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 565404C41D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.m */; };
 		567734041D5AD4D000DDBA60 /* UITableView+CFEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 567734031D5AD4D000DDBA60 /* UITableView+CFEx.m */; };
-		569288211D58752D00DE8249 /* CFAddCoffeeViewControllerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 569288201D58752D00DE8249 /* CFAddCoffeeViewControllerTableViewCell.m */; };
-		569288241D5879C300DE8249 /* CFAddCoffeeViewControllerDescCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 569288231D5879C300DE8249 /* CFAddCoffeeViewControllerDescCell.m */; };
 		569288271D588DE700DE8249 /* HSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 569288261D588DE700DE8249 /* HSTextView.m */; };
+		56B1B8291D64418A00157BC8 /* CFAddCoffeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B1B8241D64418A00157BC8 /* CFAddCoffeeViewController.m */; };
+		56B1B82A1D64418A00157BC8 /* CFAddCoffeeViewControllerDescTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B1B8261D64418A00157BC8 /* CFAddCoffeeViewControllerDescTextCell.m */; };
+		56B1B82B1D64418A00157BC8 /* CFAddCoffeeViewControllerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B1B8281D64418A00157BC8 /* CFAddCoffeeViewControllerTableViewCell.m */; };
+		56B1B82E1D6441BB00157BC8 /* CFEditCoffeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B1B82D1D6441BB00157BC8 /* CFEditCoffeeViewController.m */; };
+		56B1B8311D64563E00157BC8 /* CFAddCoffeeViewControllerDescImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B1B8301D64563E00157BC8 /* CFAddCoffeeViewControllerDescImageCell.m */; };
+		56B1B8341D6462DE00157BC8 /* CFAddCoffeeViewControllerDescVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B1B8331D6462DE00157BC8 /* CFAddCoffeeViewControllerDescVideoCell.m */; };
 		56D4BD801D48522B0093EAFF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D4BD411D48522B0093EAFF /* AppDelegate.m */; };
 		56D4BD851D48522B0093EAFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56D4BD4E1D48522B0093EAFF /* Assets.xcassets */; };
 		56D4BD871D48522B0093EAFF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D4BD521D48522B0093EAFF /* main.m */; };
@@ -99,8 +102,6 @@
 		5648BB361D507D64005E1A74 /* CFVideoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFVideoManager.m; sourceTree = "<group>"; };
 		5648BB3D1D507D78005E1A74 /* CFCoffeeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFCoffeeModel.h; sourceTree = "<group>"; };
 		5648BB3E1D507D78005E1A74 /* CFCoffeeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFCoffeeModel.m; sourceTree = "<group>"; };
-		5648BB431D50852A005E1A74 /* CFAddCoffeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAddCoffeeViewController.h; sourceTree = "<group>"; };
-		5648BB441D50852A005E1A74 /* CFAddCoffeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAddCoffeeViewController.m; sourceTree = "<group>"; };
 		5648BB491D509087005E1A74 /* UIImagePickerController+CFImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+CFImagePicker.h"; sourceTree = "<group>"; };
 		5648BB4A1D509087005E1A74 /* UIImagePickerController+CFImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+CFImagePicker.m"; sourceTree = "<group>"; };
 		5648BB4C1D5096F4005E1A74 /* CFAvatarCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAvatarCropViewController.h; sourceTree = "<group>"; };
@@ -111,12 +112,20 @@
 		565404C41D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFUpdateCoffeeViewControllerDescCell.m; sourceTree = "<group>"; };
 		567734021D5AD4D000DDBA60 /* UITableView+CFEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+CFEx.h"; sourceTree = "<group>"; };
 		567734031D5AD4D000DDBA60 /* UITableView+CFEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+CFEx.m"; sourceTree = "<group>"; };
-		5692881F1D58752D00DE8249 /* CFAddCoffeeViewControllerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAddCoffeeViewControllerTableViewCell.h; sourceTree = "<group>"; };
-		569288201D58752D00DE8249 /* CFAddCoffeeViewControllerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAddCoffeeViewControllerTableViewCell.m; sourceTree = "<group>"; };
-		569288221D5879C300DE8249 /* CFAddCoffeeViewControllerDescCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAddCoffeeViewControllerDescCell.h; sourceTree = "<group>"; };
-		569288231D5879C300DE8249 /* CFAddCoffeeViewControllerDescCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAddCoffeeViewControllerDescCell.m; sourceTree = "<group>"; };
 		569288251D588DE700DE8249 /* HSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSTextView.h; sourceTree = "<group>"; };
 		569288261D588DE700DE8249 /* HSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSTextView.m; sourceTree = "<group>"; };
+		56B1B8231D64418A00157BC8 /* CFAddCoffeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAddCoffeeViewController.h; sourceTree = "<group>"; };
+		56B1B8241D64418A00157BC8 /* CFAddCoffeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAddCoffeeViewController.m; sourceTree = "<group>"; };
+		56B1B8251D64418A00157BC8 /* CFAddCoffeeViewControllerDescTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAddCoffeeViewControllerDescTextCell.h; sourceTree = "<group>"; };
+		56B1B8261D64418A00157BC8 /* CFAddCoffeeViewControllerDescTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAddCoffeeViewControllerDescTextCell.m; sourceTree = "<group>"; };
+		56B1B8271D64418A00157BC8 /* CFAddCoffeeViewControllerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAddCoffeeViewControllerTableViewCell.h; sourceTree = "<group>"; };
+		56B1B8281D64418A00157BC8 /* CFAddCoffeeViewControllerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAddCoffeeViewControllerTableViewCell.m; sourceTree = "<group>"; };
+		56B1B82C1D6441BB00157BC8 /* CFEditCoffeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFEditCoffeeViewController.h; sourceTree = "<group>"; };
+		56B1B82D1D6441BB00157BC8 /* CFEditCoffeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFEditCoffeeViewController.m; sourceTree = "<group>"; };
+		56B1B82F1D64563E00157BC8 /* CFAddCoffeeViewControllerDescImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAddCoffeeViewControllerDescImageCell.h; sourceTree = "<group>"; };
+		56B1B8301D64563E00157BC8 /* CFAddCoffeeViewControllerDescImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAddCoffeeViewControllerDescImageCell.m; sourceTree = "<group>"; };
+		56B1B8321D6462DE00157BC8 /* CFAddCoffeeViewControllerDescVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAddCoffeeViewControllerDescVideoCell.h; sourceTree = "<group>"; };
+		56B1B8331D6462DE00157BC8 /* CFAddCoffeeViewControllerDescVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFAddCoffeeViewControllerDescVideoCell.m; sourceTree = "<group>"; };
 		56D4BD401D48522B0093EAFF /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		56D4BD411D48522B0093EAFF /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		56D4BD4E1D48522B0093EAFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -193,18 +202,13 @@
 		562EA8431D4B38540023D753 /* Admin */ = {
 			isa = PBXGroup;
 			children = (
+				56B1B8221D64418A00157BC8 /* Create */,
 				562EA8441D4B38540023D753 /* CFAdminMainViewController.h */,
 				562EA8451D4B38540023D753 /* CFAdminMainViewController.m */,
 				5648BB081D5047A3005E1A74 /* CFChangeBKImageViewController.h */,
 				5648BB091D5047A3005E1A74 /* CFChangeBKImageViewController.m */,
-				5648BB431D50852A005E1A74 /* CFAddCoffeeViewController.h */,
-				5648BB441D50852A005E1A74 /* CFAddCoffeeViewController.m */,
 				5648BB4C1D5096F4005E1A74 /* CFAvatarCropViewController.h */,
 				5648BB4D1D5096F4005E1A74 /* CFAvatarCropViewController.m */,
-				5692881F1D58752D00DE8249 /* CFAddCoffeeViewControllerTableViewCell.h */,
-				569288201D58752D00DE8249 /* CFAddCoffeeViewControllerTableViewCell.m */,
-				569288221D5879C300DE8249 /* CFAddCoffeeViewControllerDescCell.h */,
-				569288231D5879C300DE8249 /* CFAddCoffeeViewControllerDescCell.m */,
 				565404C01D61B9CB00BFB0B9 /* CFUpdateCoffeeViewController.h */,
 				565404C11D61B9CB00BFB0B9 /* CFUpdateCoffeeViewController.m */,
 				565404C31D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.h */,
@@ -279,6 +283,25 @@
 				5648BB3E1D507D78005E1A74 /* CFCoffeeModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		56B1B8221D64418A00157BC8 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				56B1B8231D64418A00157BC8 /* CFAddCoffeeViewController.h */,
+				56B1B8241D64418A00157BC8 /* CFAddCoffeeViewController.m */,
+				56B1B8251D64418A00157BC8 /* CFAddCoffeeViewControllerDescTextCell.h */,
+				56B1B8261D64418A00157BC8 /* CFAddCoffeeViewControllerDescTextCell.m */,
+				56B1B8271D64418A00157BC8 /* CFAddCoffeeViewControllerTableViewCell.h */,
+				56B1B8281D64418A00157BC8 /* CFAddCoffeeViewControllerTableViewCell.m */,
+				56B1B82C1D6441BB00157BC8 /* CFEditCoffeeViewController.h */,
+				56B1B82D1D6441BB00157BC8 /* CFEditCoffeeViewController.m */,
+				56B1B82F1D64563E00157BC8 /* CFAddCoffeeViewControllerDescImageCell.h */,
+				56B1B8301D64563E00157BC8 /* CFAddCoffeeViewControllerDescImageCell.m */,
+				56B1B8321D6462DE00157BC8 /* CFAddCoffeeViewControllerDescVideoCell.h */,
+				56B1B8331D6462DE00157BC8 /* CFAddCoffeeViewControllerDescVideoCell.m */,
+			);
+			path = Create;
 			sourceTree = "<group>";
 		};
 		56D4BD3F1D48522B0093EAFF /* Coffee */ = {
@@ -633,12 +656,11 @@
 				56D4BD961D48522B0093EAFF /* EXCallbackHandle.m in Sources */,
 				562EA8521D4B38540023D753 /* CFCollectionViewFlowLayout.m in Sources */,
 				5648BB3A1D507D64005E1A74 /* CFThemeManager.m in Sources */,
+				56B1B8341D6462DE00157BC8 /* CFAddCoffeeViewControllerDescVideoCell.m in Sources */,
 				569288271D588DE700DE8249 /* HSTextView.m in Sources */,
 				56D4BD941D48522B0093EAFF /* UIImage+EXtension.m in Sources */,
 				56D4BD801D48522B0093EAFF /* AppDelegate.m in Sources */,
 				5648BB4B1D509087005E1A74 /* UIImagePickerController+CFImagePicker.m in Sources */,
-				569288241D5879C300DE8249 /* CFAddCoffeeViewControllerDescCell.m in Sources */,
-				569288211D58752D00DE8249 /* CFAddCoffeeViewControllerTableViewCell.m in Sources */,
 				5648BB0A1D5047A3005E1A74 /* CFChangeBKImageViewController.m in Sources */,
 				56D4BD8F1D48522B0093EAFF /* NSDictionary+EXtension.m in Sources */,
 				56D4BDC21D4864B40093EAFF /* NSArray+HSEx.m in Sources */,
@@ -646,6 +668,7 @@
 				56D4BD991D48522B0093EAFF /* NSStringValidation.m in Sources */,
 				5648BB391D507D64005E1A74 /* CFLoginManager.m in Sources */,
 				565404C51D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.m in Sources */,
+				56B1B8311D64563E00157BC8 /* CFAddCoffeeViewControllerDescImageCell.m in Sources */,
 				56D4BD981D48522B0093EAFF /* LocalPushCenter.m in Sources */,
 				56D4BD8E1D48522B0093EAFF /* NSDate+EXtension.m in Sources */,
 				5648BB3F1D507D78005E1A74 /* CFCoffeeModel.m in Sources */,
@@ -657,13 +680,16 @@
 				5648BB4E1D5096F4005E1A74 /* CFAvatarCropViewController.m in Sources */,
 				5648BB381D507D64005E1A74 /* CFApplicationManager.m in Sources */,
 				5613E8941D51F6DD00316704 /* CFBaseViewController.m in Sources */,
+				56B1B82B1D64418A00157BC8 /* CFAddCoffeeViewControllerTableViewCell.m in Sources */,
 				56D4BDC11D4864B40093EAFF /* HSSql.m in Sources */,
 				562EA83F1D4B0CAE0023D753 /* XWDragCellCollectionView.m in Sources */,
 				56D4BD931D48522B0093EAFF /* UIDevice+EXtension.m in Sources */,
 				56D4BD8D1D48522B0093EAFF /* NSBundle+EXtension.m in Sources */,
 				56D4BDC31D4864B40093EAFF /* HSFileManager.m in Sources */,
 				562EA8531D4B38540023D753 /* CFMainCollectionCellCollectionViewCell.m in Sources */,
+				56B1B82A1D64418A00157BC8 /* CFAddCoffeeViewControllerDescTextCell.m in Sources */,
 				5648BB3C1D507D64005E1A74 /* CFVideoManager.m in Sources */,
+				56B1B82E1D6441BB00157BC8 /* CFEditCoffeeViewController.m in Sources */,
 				562EA8541D4B38540023D753 /* CFUserMainViewController.m in Sources */,
 				56D4BD921D48522B0093EAFF /* UIColor+EXtension.m in Sources */,
 				562EA8381D4A04D00023D753 /* UIView+HSUIView.m in Sources */,
@@ -674,8 +700,8 @@
 				567734041D5AD4D000DDBA60 /* UITableView+CFEx.m in Sources */,
 				56D4BDC01D4864B40093EAFF /* CFDBManager.m in Sources */,
 				564722121D59B920004B9923 /* CFUserCoffeeDetailViewController.m in Sources */,
-				5648BB451D50852A005E1A74 /* CFAddCoffeeViewController.m in Sources */,
 				56D4BDB01D48586D0093EAFF /* CFLoginViewController.m in Sources */,
+				56B1B8291D64418A00157BC8 /* CFAddCoffeeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

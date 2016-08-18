@@ -49,7 +49,7 @@
     
     UIViewController *currentNaviViewController = nil;
     UIViewController *currentViewController = nil;
-    currentViewController = [[CFUserMainViewController alloc] init];
+    currentViewController = [[CFAdminMainViewController alloc] init];
     currentNaviViewController = [[UINavigationController alloc] initWithRootViewController:currentViewController];
     return currentNaviViewController;
 }

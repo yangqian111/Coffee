@@ -12,4 +12,6 @@
 
 - (void)popCurrentViewController;
 
+- (void)dismissCurrentViewController;
+
 @end

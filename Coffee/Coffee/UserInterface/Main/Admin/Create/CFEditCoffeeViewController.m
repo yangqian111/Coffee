@@ -30,6 +30,7 @@
     self.view.backgroundColor = [UIColor colorWithHexString:@"eaeaea"];
     
     HSTextView *textView = [HSTextView new];
+    textView.font = [UIFont systemFontOfSize:16];
     textView.placeholder = @"简介";
     [self.view addSubview:textView];
     [textView mas_makeConstraints:^(MASConstraintMaker *make) {

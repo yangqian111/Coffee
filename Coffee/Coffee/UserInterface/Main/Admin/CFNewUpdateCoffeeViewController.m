@@ -1,11 +1,12 @@
 //
-//  CFAddCoffeeViewController.m
+//  CFNewUpdateCoffeeViewController.m
 //  Coffee
 //
-//  Created by 羊谦 on 16/8/2.
+//  Created by yangqian on 16/8/19.
 //  Copyright © 2016年 yangqian. All rights reserved.
 //
 
+#import "CFNewUpdateCoffeeViewController.h"
 #import "CFAddCoffeeViewController.h"
 #import "SDWebImageManager.h"
 #import "CFAvatarCropViewController.h"
@@ -16,10 +17,12 @@
 #import "CFAddCoffeeViewControllerDescVideoCell.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface CFAddCoffeeViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CFEditCoffeeViewControllerDelegate>
+
+@interface CFNewUpdateCoffeeViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CFEditCoffeeViewControllerDelegate>
 {
     NSMutableArray *_descArr;
     NSMutableArray *_videoArr;
+    BOOL _isFirst;
 }
 
 
@@ -38,22 +41,26 @@
 @property (nonatomic,copy) NSString *desc;//简介
 @property (nonatomic,copy) NSString*videoURL;//视频地址
 @property (nonatomic,weak) UIButton *saveBtn;
+@property (nonatomic,weak) UIButton *deleteBtn;
 @property (nonatomic,assign) NSUInteger index;
 @property (nonatomic,strong) UIPopoverController *popover;
+@property (nonatomic,strong) CFCoffeeModel *coffee;
 
 @end
 
-@implementation CFAddCoffeeViewController
+@implementation CFNewUpdateCoffeeViewController
 
-- (instancetype)initWithIndex:(NSUInteger)index {
+-(instancetype)initWithCoffee:(CFCoffeeModel *)coffee {
     self = [super init];
     if (self) {
-        _index = index;
         _descArr = [NSMutableArray array];
         _videoArr = [NSMutableArray array];
+        _coffee = coffee;
+        _isFirst = YES;
     }
     return self;
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,8 +68,21 @@
     bk.image = [UIImage imageNamed:@"detail_bk"];
     [self.view addSubview:bk];
     
+    // 分割文本到数组
+    NSArray *textArray = [_coffee.desc componentsSeparatedByString:@"\n\t"];
+    for (NSString *s in textArray) {
+        if ([s containsString:@"http://"]) {
+            UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:s];
+            [_descArr addObject:image];
+        }else{
+            [_descArr addObject:s];
+        }
+    }
+    if (_coffee.videoURL) {
+        [_videoArr addObject:[NSURL URLWithString:_coffee.videoURL]];
+    }
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake((kApplicationWidth-600)/2, 64, 600, kApplicationHeight-164) style:UITableViewStylePlain];
-    //    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     tableView.showsVerticalScrollIndicator = NO;
     tableView.estimatedRowHeight = 44.f;
     tableView.rowHeight = UITableViewAutomaticDimension;
@@ -87,13 +107,45 @@
     [self.view addSubview: saveBtn];
     self.saveBtn = saveBtn;
     [saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view);
+        make.left.mas_equalTo((kApplicationWidth-500)/2);
+        make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(-20);
+        make.height.mas_equalTo(50);
+        make.width.mas_equalTo(200);
+    }];
+    
+    UIButton *deleteBtn = [UIButton new];
+    [deleteBtn addTarget:self action:@selector(deleteCoffee) forControlEvents:UIControlEventTouchUpInside];
+    [deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
+    [deleteBtn setBackgroundColor:[UIColor lightGrayColor]];
+    deleteBtn.layer.cornerRadius = 10;
+    deleteBtn.layer.masksToBounds = YES;
+    [self.view addSubview: deleteBtn];
+    self.deleteBtn = deleteBtn;
+    [deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(saveBtn.mas_right).mas_offset(100);
         make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(-20);
         make.height.mas_equalTo(50);
         make.width.mas_equalTo(200);
     }];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(popCurrentViewController)];
+}
+
+- (void)deleteCoffee {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确定删除吗？" message:@"删除不可恢复" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [CFDB deleteCoffee:_coffee.coffeeId finish:^(BOOL success) {
+            if (success) {
+                [EXCallbackHandle notify:kUpdateCoffeeSuccess];
+                [self popCurrentViewController];
+            }
+					   }];
+    }];
+    [alert addAction:action];
+    [alert addAction:confirm];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -136,6 +188,18 @@
         self.flavorDesc = cell.flavorDesc;
         self.avatarImageCache = cell.avatarImageCache;
         self.flavorDescImageCache = cell.flavorDescImageCache;
+        if (_isFirst) {
+            cell.name.text = _coffee.name;
+            cell.price.text = _coffee.price;
+            cell.country.text = _coffee.country;
+            cell.level.text = _coffee.level;
+            cell.productArea.text = _coffee.productArea;
+            cell.heightLevel.text = _coffee.heightLevel;
+            cell.flavorDesc.text = _coffee.flavorDesc;
+            [cell.avatarImage sd_setImageWithURL:[NSURL URLWithString:_coffee.avatarURL] forState: UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_image"]];
+            _isFirst = NO;
+        }
+        
         return cell;
     }else if(indexPath.section == 1) {
         id desc = _descArr[indexPath.row];
@@ -246,7 +310,6 @@
 }
 
 - (void)saveCoffee {
-    
     if (self.name.text.length == 0 || self.price.text.length == 0) {
         [self.view makeToast:@"咖啡名或价格不能为空"];
         return;
@@ -258,16 +321,16 @@
     [[SDWebImageManager sharedManager] saveImageToCache:flavorDescImageCache forURL:[NSURL URLWithString:flavorDescImageCacheUUID]];
     [[SDWebImageManager sharedManager] saveImageToCache:cacheImage forURL:[NSURL URLWithString:cacheImageUUID]];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setObject:[[NSUUID UUID] UUIDString] forKey: @"coffeeId"];
+    [dic setObject:_coffee.coffeeId forKey: @"coffeeId"];
     [dic setObject:self.name.text forKey: @"name"];
     [dic setObject:self.price.text forKey: @"price"];
     [dic setObject:cacheImageUUID forKey: @"avatarURL"];
-    [dic setObject:@(_index) forKey:@"index"];
     [dic setObject:self.country.text forKey: @"country"];
     [dic setObject:self.productArea.text forKey: @"productArea"];
     [dic setObject:self.heightLevel.text forKey: @"heightLevel"];
     [dic setObject:self.level.text forKey: @"level"];
     [dic setObject:self.flavorDesc.text forKey: @"flavorDesc"];
+    [dic setObject:@(_coffee.index) forKey:@"index"];
     [dic setObject:flavorDescImageCacheUUID forKey: @"flavorDescURL"];
     
     NSString *desc = @"";
@@ -293,9 +356,9 @@
         [dic setObject:urlStr forKey:@"videoURL"];
     }
     CFCoffeeModel *model = [[CFCoffeeModel alloc] initWithDictionary:dic];
-    [CFDB addCoffee:@[model] finish:^(BOOL success) {
+    [CFDB updateCoffee:@[model] finish:^(BOOL success) {
         if (success) {
-            [EXCallbackHandle notify:kAddCoffeeSuccess];
+            [EXCallbackHandle notify:kUpdateCoffeeSuccess];
             [self.navigationController popViewControllerAnimated:YES];
             [self.view makeToast:@"添加成功"];
         }

@@ -10,4 +10,6 @@
 
 @interface CFAddCoffeeViewControllerDescVideoCell : UITableViewCell
 
+- (void)configCell:(NSURL *)videoURL;
+
 @end

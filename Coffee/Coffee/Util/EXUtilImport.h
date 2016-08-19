@@ -25,4 +25,5 @@
 #import "CFBaseViewController.h"
 #import "UIScrollView+EXtention.h"
 #import "UIImageView+WebCache.h"
+#import "MBProgressHUD.h"
 

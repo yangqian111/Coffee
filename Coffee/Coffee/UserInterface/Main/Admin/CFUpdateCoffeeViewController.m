@@ -120,7 +120,6 @@
         make.width.mas_equalTo(200);
     }];
     
-    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(popCurrentViewController)];
 }
 

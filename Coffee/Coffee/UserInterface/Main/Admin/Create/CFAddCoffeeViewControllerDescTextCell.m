@@ -24,6 +24,8 @@
         self.backgroundColor = [UIColor clearColor];
         
         UILabel *label = [UILabel new];
+        label.numberOfLines = 0;
+        label.lineBreakMode = NSLineBreakByCharWrapping;
         self.text = label;
         label.font = [UIFont systemFontOfSize:16];
         label.textColor = [UIColor colorWithHexString:@"676561"];

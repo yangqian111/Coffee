@@ -31,6 +31,7 @@
 		5648BB4E1D5096F4005E1A74 /* CFAvatarCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5648BB4D1D5096F4005E1A74 /* CFAvatarCropViewController.m */; };
 		565404C21D61B9CB00BFB0B9 /* CFUpdateCoffeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565404C11D61B9CB00BFB0B9 /* CFUpdateCoffeeViewController.m */; };
 		565404C51D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 565404C41D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.m */; };
+		565863961D66F9D1001265D2 /* CFNewUpdateCoffeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 565863951D66F9D1001265D2 /* CFNewUpdateCoffeeViewController.m */; };
 		567734041D5AD4D000DDBA60 /* UITableView+CFEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 567734031D5AD4D000DDBA60 /* UITableView+CFEx.m */; };
 		569288271D588DE700DE8249 /* HSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 569288261D588DE700DE8249 /* HSTextView.m */; };
 		56B1B8291D64418A00157BC8 /* CFAddCoffeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B1B8241D64418A00157BC8 /* CFAddCoffeeViewController.m */; };
@@ -110,6 +111,8 @@
 		565404C11D61B9CB00BFB0B9 /* CFUpdateCoffeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFUpdateCoffeeViewController.m; sourceTree = "<group>"; };
 		565404C31D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFUpdateCoffeeViewControllerDescCell.h; sourceTree = "<group>"; };
 		565404C41D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFUpdateCoffeeViewControllerDescCell.m; sourceTree = "<group>"; };
+		565863941D66F9D1001265D2 /* CFNewUpdateCoffeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFNewUpdateCoffeeViewController.h; sourceTree = "<group>"; };
+		565863951D66F9D1001265D2 /* CFNewUpdateCoffeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFNewUpdateCoffeeViewController.m; sourceTree = "<group>"; };
 		567734021D5AD4D000DDBA60 /* UITableView+CFEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+CFEx.h"; sourceTree = "<group>"; };
 		567734031D5AD4D000DDBA60 /* UITableView+CFEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+CFEx.m"; sourceTree = "<group>"; };
 		569288251D588DE700DE8249 /* HSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSTextView.h; sourceTree = "<group>"; };
@@ -213,6 +216,8 @@
 				565404C11D61B9CB00BFB0B9 /* CFUpdateCoffeeViewController.m */,
 				565404C31D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.h */,
 				565404C41D61BEAA00BFB0B9 /* CFUpdateCoffeeViewControllerDescCell.m */,
+				565863941D66F9D1001265D2 /* CFNewUpdateCoffeeViewController.h */,
+				565863951D66F9D1001265D2 /* CFNewUpdateCoffeeViewController.m */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -686,6 +691,7 @@
 				56D4BD931D48522B0093EAFF /* UIDevice+EXtension.m in Sources */,
 				56D4BD8D1D48522B0093EAFF /* NSBundle+EXtension.m in Sources */,
 				56D4BDC31D4864B40093EAFF /* HSFileManager.m in Sources */,
+				565863961D66F9D1001265D2 /* CFNewUpdateCoffeeViewController.m in Sources */,
 				562EA8531D4B38540023D753 /* CFMainCollectionCellCollectionViewCell.m in Sources */,
 				56B1B82A1D64418A00157BC8 /* CFAddCoffeeViewControllerDescTextCell.m in Sources */,
 				5648BB3C1D507D64005E1A74 /* CFVideoManager.m in Sources */,

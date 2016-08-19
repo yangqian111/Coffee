@@ -33,8 +33,9 @@
     bk.image = [UIImage imageNamed:@"detail_bk"];
     [self.view addSubview:bk];
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kApplicationWidth, kApplicationHeight-64) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake((kApplicationWidth-600)/2, 64, 600, kApplicationHeight-64) style:UITableViewStylePlain];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.showsVerticalScrollIndicator = NO;
     tableView.estimatedRowHeight = 44.f;
     tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.backgroundColor = [UIColor clearColor];

@@ -26,6 +26,8 @@
 }
 @property (nonatomic, strong) NSArray *data;
 @property (nonatomic,weak) UIImageView *BKImageView; //背景图
+@property (nonatomic,weak) UILabel *firstTitle;
+@property (nonatomic,weak) UILabel *secondTitle;
 @end
 
 @implementation CFAdminMainViewController
@@ -34,6 +36,8 @@
     [super viewDidLoad];
     [self getAllCoffee];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeBK) name:kChangeApplicationBK object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTitle) name:kChangeApplicationTitle object:nil];
+    
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting"] style:UIBarButtonItemStylePlain target:self action:@selector(setting)];
     
@@ -73,14 +77,19 @@
     UILabel *label1 = [UILabel new];
     label1.font = [UIFont fontWithName:@"HelveticaNeue" size:20.f];
     label1.textColor = [UIColor colorWithHexString:@"BA6D89"];
-    label1.text = @"Enjoy coffee time";
+    self.firstTitle = label1;
     [self.view addSubview:label1];
+    NSString *firstTitle = [[CFUserManager manager] firstTitle];
+    self.firstTitle.text = firstTitle;
     
     UILabel *label2 = [UILabel new];
     label2.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:50.f];
     label2.textColor = [UIColor whiteColor];
-    label2.text = @"Choose your coffee";
+    self.secondTitle = label2;
     [self.view addSubview:label2];
+    
+    NSString *secondTitle = [[CFUserManager manager] secondTitle];
+    self.secondTitle.text = secondTitle;
     
     [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
@@ -141,11 +150,11 @@
 }
 
 - (void)setting {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Coffee" message:@"设置" preferredStyle: UIAlertControllerStyleActionSheet];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"设置" preferredStyle: UIAlertControllerStyleActionSheet];
     UIAlertAction *archiveAction = [UIAlertAction actionWithTitle:@"切换用户" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [EXCallbackHandle notify:@"CFToUser"];
     }];
-    UIAlertAction *changeBKImage = [UIAlertAction actionWithTitle:@"设置背景图" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *changeBKImage = [UIAlertAction actionWithTitle:@"设置背景图与首页标题" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         CFChangeBKImageViewController *vc = [[CFChangeBKImageViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }];
@@ -235,6 +244,13 @@
         countPage+=1;
     }
     return countPage;
+}
+
+- (void)changeTitle {
+    NSString *secondTitle = [[CFUserManager manager] secondTitle];
+    self.secondTitle.text = secondTitle;
+    NSString *firstTitle = [[CFUserManager manager] firstTitle];
+    self.firstTitle.text = firstTitle;
 }
 
 //改变背景

@@ -15,12 +15,8 @@
 @property (nonatomic,weak) UIImageView *avatar;
 @property (nonatomic,weak) UILabel *name;
 @property (nonatomic,weak) UILabel *price;
-@property (nonatomic,weak) UILabel *country;
-@property (nonatomic,weak) UILabel *level;
-@property (nonatomic,weak) UILabel *productArea;
-@property (nonatomic,weak) UILabel *heightLevel;
-@property (nonatomic,weak) UILabel *flavorDesc;
-@property (nonatomic,weak) UIImageView *flavorImageView;
+
+@property (nonatomic,weak) UILabel *properties;
 @property (nonatomic,weak) TYAttributedLabel *descLabel;
 @property (nonatomic,strong) MPMoviePlayerController *moviePlayer;//视频播放控制器
 @property (nonatomic,strong) UIButton *button;
@@ -40,7 +36,7 @@
         icon.image = [UIImage imageNamed:@"icon"];
         [icon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.contentView);
-            make.top.mas_equalTo(self.contentView).mas_offset(60);
+            make.top.mas_equalTo(self.contentView).mas_offset(40);
             make.width.mas_equalTo(240);
             make.height.mas_equalTo(125);
         }];
@@ -55,7 +51,7 @@
         [addAvatar mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(icon.mas_left).mas_offset(-30);
             make.width.height.mas_equalTo(130);
-            make.top.mas_equalTo(icon.mas_bottom).mas_offset(40);
+            make.top.mas_equalTo(icon.mas_bottom).mas_offset(60);
             
         }];
         
@@ -67,6 +63,7 @@
         [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(addAvatar).mas_offset(5);
             make.left.mas_equalTo(icon.mas_left);
+            make.top.mas_equalTo(addAvatar).mas_offset(-40);
         }];
         
         UILabel *name = [UILabel new];
@@ -102,113 +99,18 @@
             make.width.mas_equalTo(150);
         }];
         
-        UILabel *countryLabel = [UILabel new];
-        [self.contentView addSubview:countryLabel];
-        countryLabel.text = @"国家:";
-        countryLabel.textColor = [UIColor colorWithHexString:@"5e544a"];
-        countryLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
-        [countryLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(nameLabel.mas_bottom).mas_offset(25);
-            make.left.mas_equalTo(icon.mas_left);
-        }];
-        
-        UILabel *country = [UILabel new];
-        country.textColor = [UIColor colorWithHexString:@"676561"];
-        country.font  = [UIFont systemFontOfSize:16];
-        [self.contentView addSubview:country];
-        self.country = country;
-        
-        UILabel *levelLabel = [UILabel new];
-        [self.contentView addSubview:levelLabel];
-        levelLabel.text = @"等级:";
-        levelLabel.textColor = [UIColor colorWithHexString:@"5e544a"];
-        levelLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
-        [levelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(countryLabel);
-            make.left.mas_equalTo(icon.mas_right);
-        }];
-        
-        [country mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(countryLabel);
-            make.left.mas_equalTo(countryLabel.mas_right).mas_offset(10);
-            make.width.mas_equalTo(150);
-        }];
-        
-        UILabel *level = [UILabel new];
-        level.textColor = [UIColor colorWithHexString:@"676561"];
-        level.font  = [UIFont systemFontOfSize:16];
-        [self.contentView addSubview:level];
-        self.level = level;
-        [level mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(countryLabel);
-            make.left.mas_equalTo(levelLabel.mas_right).mas_offset(10);
-            make.width.mas_equalTo(150);
-        }];
-        
-        UILabel *productAreaLabel = [UILabel new];
-        [self.contentView addSubview:productAreaLabel];
-        productAreaLabel.text = @"产地:";
-        productAreaLabel.textColor = [UIColor colorWithHexString:@"5e544a"];
-        productAreaLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
-        [productAreaLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(countryLabel.mas_bottom).mas_offset(25);
-            make.left.mas_equalTo(icon.mas_left);
-        }];
-        
-        UILabel *productArea = [UILabel new];
-        productArea.textColor = [UIColor colorWithHexString:@"676561"];
-        productArea.font  = [UIFont systemFontOfSize:16];
-        [self.contentView addSubview:productArea];
-        self.productArea = productArea;
-        [productArea mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(productAreaLabel);
-            make.left.mas_equalTo(productAreaLabel.mas_right).mas_offset(10);
-            make.width.mas_equalTo(300);
-        }];
-        
-        
-        UILabel *heightLevelLabel = [UILabel new];
-        [self.contentView addSubview:heightLevelLabel];
-        heightLevelLabel.text = @"海拔:";
-        heightLevelLabel.textColor = [UIColor colorWithHexString:@"5e544a"];
-        heightLevelLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
-        [heightLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(productAreaLabel.mas_bottom).mas_offset(25);
-            make.left.mas_equalTo(icon.mas_left);
-        }];
-        
-        UILabel *heightLevel = [UILabel new];
-        heightLevel.textColor = [UIColor colorWithHexString:@"676561"];
-        heightLevel.font  = [UIFont systemFontOfSize:16];
-        [self.contentView addSubview:heightLevel];
-        self.heightLevel = heightLevel;
-        [heightLevel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(heightLevelLabel);
-            make.left.mas_equalTo(heightLevelLabel.mas_right).mas_offset(10);
-            make.width.mas_equalTo(300);
-        }];
-        
-        UILabel *flavorDescLabel = [UILabel new];
-        [self.contentView addSubview:flavorDescLabel];
-        flavorDescLabel.text = @"风味描述:";
-        flavorDescLabel.textColor = [UIColor colorWithHexString:@"5e544a"];
-        flavorDescLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
-        [flavorDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(addAvatar);
-            make.top.mas_equalTo(heightLevel.mas_bottom).mas_offset(25);
-        }];
-        
-        UILabel *flavorDesc = [UILabel new];
-        flavorDesc.textColor = [UIColor colorWithHexString:@"676561"];
-        flavorDesc.font  = [UIFont systemFontOfSize:16];
-        flavorDesc.lineBreakMode = NSLineBreakByCharWrapping;
-        flavorDesc.numberOfLines = 0;
-        self.flavorDesc = flavorDesc;
-        [self.contentView addSubview:flavorDesc];
-        [flavorDesc mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(flavorDescLabel);
-            make.left.mas_equalTo(flavorDescLabel.mas_right).mas_offset(10);
-            make.width.mas_equalTo(500);
+        UILabel *properties = [UILabel new];
+        properties.contentMode = UIViewContentModeTopLeft;
+        properties.numberOfLines = 0;
+        properties.lineBreakMode = NSLineBreakByWordWrapping;
+        self.properties = properties;
+        properties.textColor = [UIColor redColor];
+        [self.contentView addSubview:properties];
+        [properties mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(nameLabel);
+            make.top.mas_equalTo(name.mas_bottom).mas_offset(5);
+            make.right.mas_equalTo(price);
+            make.bottom.mas_greaterThanOrEqualTo(addAvatar);
         }];
         
         TYAttributedLabel *descLabel = [TYAttributedLabel new];
@@ -220,8 +122,8 @@
         [self.contentView addSubview:descLabel];
         descLabel.preferredMaxLayoutWidth = 600;
         [descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(flavorDescLabel);
-            make.top.mas_equalTo(flavorDesc.mas_bottom).mas_offset(20);
+            make.left.mas_equalTo(addAvatar);
+            make.top.mas_equalTo(properties.mas_bottom).mas_offset(20);
         }];
         
         _moviePlayer = [[MPMoviePlayerController alloc] init];
@@ -230,7 +132,7 @@
         [self.contentView addSubview: _moviePlayer.view];
         [_moviePlayer.view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(descLabel.mas_bottom).mas_offset(20);
-            make.left.mas_equalTo(flavorDescLabel);
+            make.left.mas_equalTo(addAvatar);
             make.width.mas_equalTo(600);
             make.height.mas_equalTo(300);
             make.bottom.mas_equalTo(self.contentView).mas_offset(-10);
@@ -242,7 +144,7 @@
         self.thumbnailImageView = thumbnailImageView;
         [thumbnailImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(descLabel.mas_bottom).mas_offset(20);
-            make.left.mas_equalTo(flavorDescLabel);
+            make.left.mas_equalTo(addAvatar);
             make.width.mas_equalTo(600);
             make.height.mas_equalTo(300);
             make.bottom.mas_equalTo(_moviePlayer.view);
@@ -267,11 +169,9 @@
     [self.avatar sd_setImageWithURL:[NSURL URLWithString:model.avatarURL] placeholderImage:[UIImage imageNamed:@"default_coffee"]];
     self.name.text = model.name;
     self.price.text = model.price;
-    self.country.text = model.country;
-    self.level.text = model.level;
-    self.productArea.text = model.productArea;
-    self.heightLevel.text = model.heightLevel;
-    self.flavorDesc.text = model.flavorDesc;
+    NSString  *msg;
+    msg = [NSString stringWithFormat:@"%@",[model.properties stringByReplacingOccurrencesOfString:@"\\n" withString:@" \r\n" ]];
+    self.properties.text = msg;
     
     NSString *desc = model.desc;
     // 分割文本到数组
@@ -293,6 +193,13 @@
     if (model.videoURL) {
         _moviePlayer.contentURL = [NSURL URLWithString:model.videoURL];
         [self thumbnailImageRequest];
+        _moviePlayer.view.hidden = NO;
+        _thumbnailImageView.hidden = NO;
+        _button.hidden = NO;
+    }else{
+        _moviePlayer.view.hidden = YES;
+        _thumbnailImageView.hidden = YES;
+        _button.hidden = YES;
     }
     [self setNeedsLayout];
 }

@@ -9,11 +9,14 @@
 #import "CFChangeBKImageViewController.h"
 #import "CFThemeManager.h"
 #import "CFThemeManager.h"
+#import "CFUserManager.h"
 
 @interface CFChangeBKImageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (nonatomic,weak) UICollectionView *colllectionview;
 @property (nonatomic,strong) NSArray *images;
+@property (nonatomic,weak) UITextField *firstTitle;
+@property (nonatomic,weak) UITextField *secondTitle;
 
 @end
 
@@ -23,13 +26,48 @@
     [super viewDidLoad];
     _images = [[[NSBundle mainBundle] pathsForResourcesOfType:@"jpg" inDirectory:@"Images"] copy];
     self.navigationItem.title = @"选择背景图片";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(popCurrentViewController)];
-    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    layout.itemSize = CGSizeMake(250, 200);
-    layout.minimumLineSpacing = 10.f;
-    layout.minimumInteritemSpacing = 10.f;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(pop)];
     
-    UICollectionView *collection = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+    UITextField *firstTitle = [UITextField new];
+    firstTitle.leftView = [[UIView alloc] initWithFrame: CGRectMake(10, 10, 4, 10)];
+    firstTitle.leftViewMode = UITextFieldViewModeAlways;
+    firstTitle.background = [UIImage imageNamed:@"short_biankuang"];
+    firstTitle.textColor = [UIColor blackColor];
+    [self.view addSubview:firstTitle];
+    
+    self.firstTitle = firstTitle;
+    NSString *firstTitleStr = [[CFUserManager manager] firstTitle];
+    firstTitle.text = firstTitleStr;
+    firstTitle.font = [UIFont systemFontOfSize:20];
+    [firstTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view);
+        make.top.mas_equalTo(100);
+        make.height.mas_equalTo(40);
+    }];
+    
+    UITextField *secondTitle = [UITextField new];
+    secondTitle.leftView = [[UIView alloc] initWithFrame: CGRectMake(10, 10, 4, 10)];
+    secondTitle.leftViewMode = UITextFieldViewModeAlways;
+    secondTitle.background = [UIImage imageNamed:@"short_biankuang"];
+    firstTitle.textColor = [UIColor blackColor];
+    [self.view addSubview:secondTitle];
+    
+    self.secondTitle = secondTitle;
+    NSString *secondTitleStr = [[CFUserManager manager] secondTitle];
+    secondTitle.text = secondTitleStr;
+    secondTitle.font = [UIFont systemFontOfSize:30];
+    [secondTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view);
+        make.top.mas_equalTo(firstTitle.mas_bottom).mas_offset(20);
+        make.height.mas_equalTo(40);
+    }];
+    
+    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+    layout.itemSize = CGSizeMake(200, 150);
+    layout.minimumLineSpacing = 50.f;
+    layout.minimumInteritemSpacing = 50.f;
+    
+    UICollectionView *collection = [[UICollectionView alloc] initWithFrame:CGRectMake(10, 200, kApplicationWidth-20, kApplicationHeight-230) collectionViewLayout:layout];
     collection.backgroundColor = [UIColor whiteColor];
     collection.contentInset = UIEdgeInsetsMake(20, 20, 20, 20);
     collection.delegate = self;
@@ -40,6 +78,13 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)pop {
+    [[CFUserManager manager] setFirstTitle:self.firstTitle.text];
+    [[CFUserManager manager] setSecondTitle:self.secondTitle.text];
+    [EXCallbackHandle notify:kChangeApplicationTitle];
+    [self popCurrentViewController];
 }
 
 

@@ -15,24 +15,17 @@
 #import "UIButton+WebCache.h"
 #import "CFUpdateCoffeeViewControllerDescCell.h"
 
-@interface CFUpdateCoffeeViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CFUpdateCoffeeViewControllerDescCellDelegate>
+@interface CFUpdateCoffeeViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CFUpdateCoffeeViewControllerDescCellDelegate,CFAddCoffeeViewControllerTableViewCellDelegate>
 {
     UIButton *_tableFootView;
     NSInteger _countRows;
     NSMutableArray *_descArr;
     BOOL _isFirst;
+    NSString *_name;
+    NSString *_price;
+    NSString *_properties;
+    UIImage *_avatar;
 }
-
-@property (nonatomic,strong) UITextField *name;//名称
-@property (nonatomic,strong) UITextField *price;//价格
-@property (nonatomic,strong) UITextField *country;//国家
-@property (nonatomic,strong) UITextField *level;//等级
-@property (nonatomic,strong) UITextField *productArea;//产地
-@property (nonatomic,strong) UITextField *heightLevel;//海拔
-@property (nonatomic,strong) UITextView *flavorDesc;//风味
-@property (nonatomic,strong) UIImage *avatarImageCache;
-@property (nonatomic,strong) UIImage *flavorDescImageCache;
-
 
 @property (nonatomic,weak) UITableView *tableView;
 @property (nonatomic,copy) NSString *desc;//简介
@@ -142,23 +135,11 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         CFAddCoffeeViewControllerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellReuser" forIndexPath:indexPath];
-        self.name = cell.name;
-        self.price = cell.price;
-        self.country = cell.country;
-        self.level =  cell.level;
-        self.productArea = cell.productArea;
-        self.heightLevel = cell.heightLevel;
-        self.flavorDesc = cell.flavorDesc;
-        self.avatarImageCache = cell.avatarImageCache;
-        self.flavorDescImageCache = cell.flavorDescImageCache;
+        cell.delegate = self;
         if (_isFirst) {
             cell.name.text = _coffee.name;
             cell.price.text = _coffee.price;
-            cell.country.text = _coffee.country;
-            cell.level.text = _coffee.level;
-            cell.productArea.text = _coffee.productArea;
-            cell.heightLevel.text = _coffee.heightLevel;
-            cell.flavorDesc.text = _coffee.flavorDesc;
+            cell.properties.text = _coffee.properties;
             [cell.avatarImage sd_setImageWithURL:[NSURL URLWithString:_coffee.avatarURL] forState: UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default_image"]];
             _isFirst = NO;
         }
@@ -221,50 +202,50 @@
 }
 
 - (void)saveCoffee {
-    if (self.name.text.length == 0 || self.price.text.length == 0) {
+    if (_name.length == 0 || _price.length == 0) {
         [self.view makeToast:@"咖啡名或价格不能为空"];
         return;
     }
     NSString *cacheImageUUID = [NSString stringWithFormat:@"http://www.coffee.com/%@.jpg",[[NSUUID UUID] UUIDString]];
     NSString *flavorDescImageCacheUUID = [NSString stringWithFormat:@"http://www.coffee.com/%@.jpg",[[NSUUID UUID] UUIDString]];
-    UIImage *cacheImage = self.avatarImageCache;
-    UIImage *flavorDescImageCache = self.flavorDescImageCache;
-    [[SDWebImageManager sharedManager] saveImageToCache:flavorDescImageCache forURL:[NSURL URLWithString:flavorDescImageCacheUUID]];
-    [[SDWebImageManager sharedManager] saveImageToCache:cacheImage forURL:[NSURL URLWithString:cacheImageUUID]];
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setObject:_coffee.coffeeId forKey: @"coffeeId"];
-    [dic setObject:self.name.text forKey: @"name"];
-    [dic setObject:self.price.text forKey: @"price"];
-    [dic setObject:cacheImageUUID forKey: @"avatarURL"];
-    [dic setObject:self.country.text forKey: @"country"];
-    [dic setObject:self.productArea.text forKey: @"productArea"];
-    [dic setObject:self.heightLevel.text forKey: @"heightLevel"];
-    [dic setObject:self.level.text forKey: @"level"];
-    [dic setObject:self.flavorDesc.text forKey: @"flavorDesc"];
-    [dic setObject:flavorDescImageCacheUUID forKey: @"flavorDescURL"];
-    
-    NSString *desc = @"";
-    for (NSDictionary *param in _descArr) {
-        NSString *descText = param[@"text"];
-        if (descText.length>0) {
-            desc = [desc stringByAppendingString:descText];
-        }
-        UIImage *descImage = param[@"image"];
-        if (descImage) {
-            NSString *descImageUUID = [NSString stringWithFormat:@"http://www.coffee.com/%@.jpg",[[NSUUID UUID] UUIDString]];
-            [[SDWebImageManager sharedManager] saveImageToCache:descImage forURL:[NSURL URLWithString:descImageUUID]];
-            desc = [NSString stringWithFormat:@"%@\n\t%@\n\t",desc,descImageUUID];
-        }
-    }
-    [dic setObject:desc forKey:@"desc"];
-    CFCoffeeModel *model = [[CFCoffeeModel alloc] initWithDictionary:dic];
-    [CFDB updateCoffee:@[model] finish:^(BOOL success) {
-        if (success) {
-            [EXCallbackHandle notify:kUpdateCoffeeSuccess];
-            [self.navigationController popViewControllerAnimated:YES];
-            [self.view makeToast:@"添加成功"];
-        }
-    }];
+    //    UIImage *cacheImage = self.avatarImageCache;
+    //    UIImage *flavorDescImageCache = self.flavorDescImageCache;
+    //    [[SDWebImageManager sharedManager] saveImageToCache:flavorDescImageCache forURL:[NSURL URLWithString:flavorDescImageCacheUUID]];
+    //    [[SDWebImageManager sharedManager] saveImageToCache:cacheImage forURL:[NSURL URLWithString:cacheImageUUID]];
+    //    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    //    [dic setObject:_coffee.coffeeId forKey: @"coffeeId"];
+    //    [dic setObject:self.name.text forKey: @"name"];
+    //    [dic setObject:self.price.text forKey: @"price"];
+    //    [dic setObject:cacheImageUUID forKey: @"avatarURL"];
+    //    [dic setObject:self.country.text forKey: @"country"];
+    //    [dic setObject:self.productArea.text forKey: @"productArea"];
+    //    [dic setObject:self.heightLevel.text forKey: @"heightLevel"];
+    //    [dic setObject:self.level.text forKey: @"level"];
+    //    [dic setObject:self.flavorDesc.text forKey: @"flavorDesc"];
+    //    [dic setObject:flavorDescImageCacheUUID forKey: @"flavorDescURL"];
+    //
+    //    NSString *desc = @"";
+    //    for (NSDictionary *param in _descArr) {
+    //        NSString *descText = param[@"text"];
+    //        if (descText.length>0) {
+    //            desc = [desc stringByAppendingString:descText];
+    //        }
+    //        UIImage *descImage = param[@"image"];
+    //        if (descImage) {
+    //            NSString *descImageUUID = [NSString stringWithFormat:@"http://www.coffee.com/%@.jpg",[[NSUUID UUID] UUIDString]];
+    //            [[SDWebImageManager sharedManager] saveImageToCache:descImage forURL:[NSURL URLWithString:descImageUUID]];
+    //            desc = [NSString stringWithFormat:@"%@\n\t%@\n\t",desc,descImageUUID];
+    //        }
+    //    }
+    //    [dic setObject:desc forKey:@"desc"];
+    //    CFCoffeeModel *model = [[CFCoffeeModel alloc] initWithDictionary:dic];
+    //    [CFDB updateCoffee:@[model] finish:^(BOOL success) {
+    //        if (success) {
+    //            [EXCallbackHandle notify:kUpdateCoffeeSuccess];
+    //            [self.navigationController popViewControllerAnimated:YES];
+    //            [self.view makeToast:@"添加成功"];
+    //        }
+    //    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -306,6 +287,13 @@
         [dic setObject: image forKey: @"image"];
         [_descArr addObject:dic];
     }
+}
+
+-(void)finishEdit:(NSString *)name price:(NSString *)price properties:(NSString *)properties headImage:(UIImage *)headImage {
+    _name = name;
+    _price = price;
+    _properties = properties;
+    _avatar = headImage;
 }
 
 @end

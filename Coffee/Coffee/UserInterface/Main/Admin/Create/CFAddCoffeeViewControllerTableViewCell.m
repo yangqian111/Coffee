@@ -9,10 +9,10 @@
 #import "CFAddCoffeeViewControllerTableViewCell.h"
 #import "CFAvatarCropViewController.h"
 
-@interface CFAddCoffeeViewControllerTableViewCell ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface CFAddCoffeeViewControllerTableViewCell ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate,UITextFieldDelegate>
 
 @property (nonatomic,strong) UIPopoverController *popover;
-
+@property (nonatomic,copy) NSString *avatarURL;
 
 @end
 
@@ -28,7 +28,7 @@
         icon.image = [UIImage imageNamed:@"icon"];
         [icon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.contentView);
-            make.top.mas_equalTo(self.contentView).mas_offset(60);
+            make.top.mas_equalTo(self.contentView).mas_offset(40);
             make.width.mas_equalTo(240);
             make.height.mas_equalTo(125);
         }];
@@ -43,7 +43,7 @@
         [addAvatar mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(icon.mas_left).mas_offset(-30);
             make.width.height.mas_equalTo(130);
-            make.top.mas_equalTo(icon.mas_bottom).mas_offset(40);
+            make.top.mas_equalTo(icon.mas_bottom).mas_offset(60);
         }];
         
         UILabel *nameLabel = [UILabel new];
@@ -53,6 +53,7 @@
         nameLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
         
         UITextField *name = [UITextField new];
+        name.delegate = self;
         name.leftView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 4, 10)];
         name.leftViewMode = UITextFieldViewModeAlways;
         name.background = [UIImage imageNamed:@"short_biankuang"];
@@ -63,7 +64,7 @@
             make.left.mas_equalTo(nameLabel.mas_right).mas_offset(5);
             make.width.mas_equalTo(150);
             make.height.mas_equalTo(35);
-            make.top.mas_equalTo(addAvatar);
+            make.top.mas_equalTo(addAvatar).mas_offset(-40);
         }];
         
         [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -78,6 +79,7 @@
         priceLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
         
         UITextField *price = [UITextField new];
+        price.delegate = self;
         price.leftView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 4, 10)];
         price.leftViewMode = UITextFieldViewModeAlways;
         price.background = [UIImage imageNamed:@"short_biankuang"];
@@ -88,7 +90,7 @@
             make.left.mas_equalTo(priceLabel.mas_right).mas_offset(5);
             make.width.mas_equalTo(150);
             make.height.mas_equalTo(35);
-            make.top.mas_equalTo(addAvatar);
+            make.top.mas_equalTo(name);
         }];
         
         [priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,145 +98,24 @@
             make.centerY.mas_equalTo(self.name);
         }];
         
-        UILabel *countryLabel = [UILabel new];
-        [self.contentView addSubview:countryLabel];
-        countryLabel.text = @"国家:";
-        countryLabel.textColor = [UIColor colorWithHexString:@"5e544a"];
-        countryLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
-        
-        UITextField *country = [UITextField new];
-        country.leftView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 4, 10)];
-        country.leftViewMode = UITextFieldViewModeAlways;
-        country.background = [UIImage imageNamed:@"short_biankuang"];
-        country.textColor = [UIColor blackColor];
-        [self.contentView addSubview:country];
-        self.country = country;
-        [country mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(countryLabel.mas_right).mas_offset(5);
-            make.width.mas_equalTo(150);
-            make.height.mas_equalTo(35);
-            make.top.mas_equalTo(name.mas_bottom).mas_offset(10);
-        }];
-        
-        [countryLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        UITextView *properties = [UITextView new];
+        properties.delegate = self;
+        properties.font = [UIFont systemFontOfSize:18];
+        properties.layer.contents = (id)[UIImage imageNamed:@"biankuang3"].CGImage;
+        properties.textColor = [UIColor blackColor];
+        [self.contentView addSubview:properties];
+        self.properties = properties;
+        [properties mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(nameLabel);
-            make.centerY.mas_equalTo(self.country);
+            make.top.mas_equalTo(name.mas_bottom).mas_offset(5);
+            make.right.mas_equalTo(price.mas_right);
+            make.bottom.mas_equalTo(self.contentView).mas_offset(-5);
+            make.height.mas_equalTo(150);
         }];
         
-        UILabel *levelLabel = [UILabel new];
-        [self.contentView addSubview:levelLabel];
-        levelLabel.text = @"等级:";
-        levelLabel.textColor = [UIColor colorWithHexString:@"5e544a"];
-        levelLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
-        
-        UITextField *level = [UITextField new];
-        level.leftView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 4, 10)];
-        level.leftViewMode = UITextFieldViewModeAlways;
-        level.background = [UIImage imageNamed:@"short_biankuang"];
-        level.textColor = [UIColor blackColor];
-        [self.contentView addSubview:level];
-        self.level = level;
-        [level mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(priceLabel.mas_right).mas_offset(5);
-            make.width.mas_equalTo(150);
-            make.height.mas_equalTo(35);
-            make.top.mas_equalTo(country);
-        }];
-        
-        [levelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(country.mas_right).mas_offset(25);
-            make.centerY.mas_equalTo(self.country);
-        }];
-        
-        UILabel *productAreaLabel = [UILabel new];
-        [self.contentView addSubview:productAreaLabel];
-        productAreaLabel.text = @"产地:";
-        productAreaLabel.textColor = [UIColor colorWithHexString:@"5e544a"];
-        productAreaLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
-        
-        UITextField *productArea = [UITextField new];
-        productArea.leftView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 4, 10)];
-        productArea.leftViewMode = UITextFieldViewModeAlways;
-        productArea.background = [UIImage imageNamed:@"medim_biankuang"];
-        productArea.textColor = [UIColor blackColor];
-        [self.contentView addSubview:productArea];
-        self.productArea = productArea;
-        [productArea mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(productAreaLabel.mas_right).mas_offset(5);
-            make.width.mas_equalTo(370);
-            make.height.mas_equalTo(35);
-            make.top.mas_equalTo(country.mas_bottom).mas_offset(10);
-        }];
-        
-        [productAreaLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(nameLabel);
-            make.centerY.mas_equalTo(self.productArea);
-        }];
-        
-        UILabel *heightLevelLabel = [UILabel new];
-        [self.contentView addSubview:heightLevelLabel];
-        heightLevelLabel.text = @"海拔:";
-        heightLevelLabel.textColor = [UIColor colorWithHexString:@"5e544a"];
-        heightLevelLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
-        
-        UITextField *heightLevel = [UITextField new];
-        heightLevel.leftView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 4, 10)];
-        heightLevel.leftViewMode = UITextFieldViewModeAlways;
-        heightLevel.background = [UIImage imageNamed:@"medim_biankuang"];
-        heightLevel.textColor = [UIColor blackColor];
-        [self.contentView addSubview:heightLevel];
-        self.heightLevel = heightLevel;
-        [heightLevel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(heightLevelLabel.mas_right).mas_offset(5);
-            make.width.mas_equalTo(370);
-            make.height.mas_equalTo(35);
-            make.top.mas_equalTo(productArea.mas_bottom).mas_offset(10);
-        }];
-        
-        [heightLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(nameLabel);
-            make.centerY.mas_equalTo(self.heightLevel);
-        }];
-        
-        UILabel *flavorDescLabel = [UILabel new];
-        [self.contentView addSubview:flavorDescLabel];
-        flavorDescLabel.text = @"风味描述:";
-        flavorDescLabel.textColor = [UIColor colorWithHexString:@"5e544a"];
-        flavorDescLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
-        
-        UITextView *flavorDesc = [UITextView new];
-        flavorDesc.font = [UIFont systemFontOfSize:18];
-        flavorDesc.layer.contents = (id)[UIImage imageNamed:@"biankuang3"].CGImage;
-        flavorDesc.textColor = [UIColor blackColor];
-        [self.contentView addSubview:flavorDesc];
-        self.flavorDesc = flavorDesc;
-        [flavorDesc mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(flavorDescLabel.mas_right).mas_offset(5);
-            make.width.mas_equalTo(495);
-            make.height.mas_equalTo(70);
-            make.top.mas_equalTo(heightLevel.mas_bottom).mas_offset(10);
-        }];
-        
-        [flavorDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(addAvatar);
-            make.centerY.mas_equalTo(self.flavorDesc);
-            make.bottom.mas_equalTo(self.contentView).mas_offset(-40);
-        }];
-        
-        //        UIImageView *flavorDescImageView =  [UIImageView new];
-        //        flavorDescImageView.image = [UIImage imageNamed:@"flavorDescImage"];
-        //        [self.contentView addSubview:flavorDescImageView];
-        //        self.flavorDescImageView = flavorDescImageView;
-        //        [flavorDescImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        //            make.centerX.mas_equalTo(self.contentView);
-        //            make.bottom.mas_equalTo(self.contentView).mas_offset(-40);
-        //            make.width.mas_equalTo(240);
-        //            make.top.mas_equalTo(flavorDesc.mas_bottom).mas_offset(20);
-        //        }];
     }
     return self;
 }
-
 
 - (void)choosePhoto:(UIButton *)sender {
     [self.superview.superview endEditing:YES];
@@ -252,9 +133,14 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     NSLog(@"出来了");
     UIImage *orgImage = [info objectForKey:UIImagePickerControllerEditedImage];
-    UIImage *compressImage = [[UIImage imageWithData:UIImageJPEGRepresentation([UIImage scaleAndRotateImage:orgImage], 0.1)] copy];
-    self.avatarImageCache = compressImage;
-    [self.avatarImage setImage:self.avatarImageCache forState:UIControlStateNormal];
+    UIImage *compressImage = [[UIImage imageWithData:UIImageJPEGRepresentation([UIImage scaleAndRotateImage:orgImage], 0.5)] copy];
+    [self.avatarImage setImage:compressImage forState:UIControlStateNormal];
+    NSString *cacheImageUUID = [NSString stringWithFormat:@"http://www.coffee.com/%@.jpg",[[NSUUID UUID] UUIDString]];
+    self.avatarURL = cacheImageUUID;
+    [[SDWebImageManager sharedManager] saveImageToCache:compressImage forURL:[NSURL URLWithString:self.avatarURL]];
+    if ([self.delegate respondsToSelector:@selector(finishEdit:price:properties:headImageURL:)]) {
+        [self.delegate finishEdit:_name.text price:_price.text properties:_properties.text headImageURL:self.avatarURL];
+    }
     [picker dismissViewControllerAnimated:YES completion:nil];
     [self.popover dismissPopoverAnimated:YES];
 }
@@ -265,6 +151,15 @@
     [self.popover dismissPopoverAnimated:YES];
 }
 
+-(void)textViewDidEndEditing:(UITextView *)textView {
+    if ([self.delegate respondsToSelector:@selector(finishEdit:price:properties:headImageURL:)]) {
+        [self.delegate finishEdit:_name.text price:_price.text properties:_properties.text headImageURL:self.avatarURL];
+    }
+}
 
-
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    if ([self.delegate respondsToSelector:@selector(finishEdit:price:properties:headImageURL:)]) {
+        [self.delegate finishEdit:_name.text price:_price.text properties:_properties.text headImageURL:self.avatarURL];
+    }
+}
 @end

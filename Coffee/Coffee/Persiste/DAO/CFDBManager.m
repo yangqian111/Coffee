@@ -169,7 +169,7 @@
         [self.dbQueue inTransaction:^(FMDatabase *db, BOOL *rollback) {
             for (CFCoffeeModel *model in coffeesCopy) {
                 NSString *sql = [HSSql sqlForAddCoffee];
-                [db executeUpdate:sql,model.coffeeId,@(model.index),model.name,model.avatarURL,model.price,model.country,model.productArea,model.heightLevel,model.level,model.flavorDesc,model.flavorDescURL,model.desc,model.videoURL];
+                [db executeUpdate:sql,model.coffeeId,@(model.index),model.name,model.avatarURL,model.price,model.properties,model.desc,model.videoURL];
             }
             success = ![db hadError];
         }];
@@ -208,7 +208,7 @@
             NSString *sql = [HSSql sqlForUpdateCoffee];
             for (CFCoffeeModel *model in coffeesCopy) {
                 if ([model isKindOfClass:[CFCoffeeModel class]]) {
-                    [db executeUpdate:sql,@(model.index),model.name,model.avatarURL,model.price,model.country,model.productArea,model.heightLevel,model.level,model.flavorDesc,model.flavorDescURL,model.desc,model.videoURL,model.coffeeId];
+                    [db executeUpdate:sql,@(model.index),model.name,model.avatarURL,model.price,model.properties,model.desc,model.videoURL,model.coffeeId];
                 }
             }
             success = ![db hadError];

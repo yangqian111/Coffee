@@ -9,18 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "UIButton+WebCache.h"
 
-@interface CFAddCoffeeViewControllerTableViewCell : UITableViewCell
+@protocol CFAddCoffeeViewControllerTableViewCellDelegate <NSObject>
 
+- (void)finishEdit:(NSString *)name price:(NSString *)price properties:(NSString *)properties headImageURL:(NSString *)headImageURL;
+
+@end
+
+@interface CFAddCoffeeViewControllerTableViewCell : UITableViewCell
 
 @property (nonatomic,weak) UIButton *avatarImage;
 @property (nonatomic,weak) UITextField *name;//名称
 @property (nonatomic,weak) UITextField *price;//价格
-@property (nonatomic,weak) UITextField *country;//国家
-@property (nonatomic,weak) UITextField *level;//等级
-@property (nonatomic,weak) UITextField *productArea;//产地
-@property (nonatomic,weak) UITextField *heightLevel;//海拔
-@property (nonatomic,weak) UITextView *flavorDesc;//风味描述
-@property (nonatomic,strong) UIImage *avatarImageCache;
-@property (nonatomic,strong) UIImage *flavorDescImageCache;
+@property (nonatomic,weak) UITextView *properties;//自定义描述
+@property (nonatomic,weak) id<CFAddCoffeeViewControllerTableViewCellDelegate> delegate;
 
 @end

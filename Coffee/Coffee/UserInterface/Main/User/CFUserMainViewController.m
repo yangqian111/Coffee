@@ -58,14 +58,18 @@
     UILabel *label1 = [UILabel new];
     label1.font = [UIFont fontWithName:@"HelveticaNeue" size:20.f];
     label1.textColor = [UIColor colorWithHexString:@"BA6D89"];
-    label1.text = @"Enjoy coffee time";
+    
     [self.view addSubview:label1];
+    NSString *firstTitle = [[CFUserManager manager] firstTitle];
+    label1.text = firstTitle;
     
     UILabel *label2 = [UILabel new];
     label2.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:50.f];
     label2.textColor = [UIColor whiteColor];
-    label2.text = @"Choose your coffee";
     [self.view addSubview:label2];
+    
+    NSString *secondTitle = [[CFUserManager manager] secondTitle];
+    label2.text = secondTitle;
     
     [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
@@ -118,7 +122,7 @@
 }
 
 - (void)setting {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Coffee" message:@"设置" preferredStyle: UIAlertControllerStyleActionSheet];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"设置" preferredStyle: UIAlertControllerStyleActionSheet];
     UIAlertAction *archiveAction = [UIAlertAction actionWithTitle:@"切换用户" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self willPresentAdminMainViewController];
     }];

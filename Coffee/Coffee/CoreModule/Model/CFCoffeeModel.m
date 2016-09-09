@@ -21,12 +21,7 @@
         _price = [dicCopy[@"price"] isKindOfClass:[NSNull class]] ? nil : dicCopy[@"price"];
         _avatarURL = [dicCopy[@"avatarURL"] isKindOfClass:[NSNull class]] ? nil : dicCopy[@"avatarURL"];
         _index = [dicCopy[@"indexCoffee"] intValue];
-        _country = [dicCopy[@"country"] isKindOfClass:[NSNull class]] ? nil : dicCopy[@"country"];
-        _productArea = [dicCopy[@"productArea"] isKindOfClass:[NSNull class]] ? nil : dicCopy[@"productArea"];
-        _level = [dicCopy[@"level"] isKindOfClass:[NSNull class]] ? nil : dicCopy[@"level"];
-        _heightLevel = [dicCopy[@"heightLevel"] isKindOfClass:[NSNull class]] ? nil : dicCopy[@"heightLevel"];
-        _flavorDesc = [dicCopy[@"flavorDesc"] isKindOfClass:[NSNull class]] ? nil : dicCopy[@"flavorDesc"];
-        _flavorDescURL = [dicCopy[@"flavorDescURL"] isKindOfClass:[NSNull class]] ? nil : dicCopy[@"flavorDescURL"];
+        _properties = [dicCopy[@"properties"] isKindOfClass:[NSNull class]] ? nil : dicCopy[@"properties"];
         _desc = [dicCopy[@"desc"] isKindOfClass:[NSNull class]] ? nil : dicCopy[@"desc"];
         _videoURL = [dicCopy[@"videoURL"] isKindOfClass:[NSNull class]] ? nil : dicCopy[@"videoURL"];
     }

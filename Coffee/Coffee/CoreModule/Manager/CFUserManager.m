@@ -49,4 +49,30 @@
     return NO;
 }
 
+- (NSString *)firstTitle {
+    NSString *firstTitle = [[NSUserDefaults standardUserDefaults] valueForKey:@"firstTitle"];
+    if (firstTitle.length>0) {
+        return firstTitle;
+    }
+    return @"Enjoy coffee time";
+}
+
+-(NSString *)secondTitle {
+    NSString *secondTitle = [[NSUserDefaults standardUserDefaults] valueForKey:@"secondTitle"];
+    if (secondTitle.length>0) {
+        return secondTitle;
+    }
+    return @"Choose your coffee";
+}
+
+-(void)setFirstTitle:(NSString *)firstTitle {
+    [[NSUserDefaults standardUserDefaults] setObject:firstTitle forKey:@"firstTitle"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(void)setSecondTitle:(NSString *)secondTitle {
+    [[NSUserDefaults standardUserDefaults] setObject:secondTitle forKey:@"secondTitle"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 @end

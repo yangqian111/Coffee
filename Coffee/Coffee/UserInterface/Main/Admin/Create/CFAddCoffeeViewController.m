@@ -16,23 +16,15 @@
 #import "CFAddCoffeeViewControllerDescVideoCell.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface CFAddCoffeeViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CFEditCoffeeViewControllerDelegate>
+@interface CFAddCoffeeViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CFEditCoffeeViewControllerDelegate,CFAddCoffeeViewControllerTableViewCellDelegate>
 {
     NSMutableArray *_descArr;
     NSMutableArray *_videoArr;
+    NSString *_name;
+    NSString *_price;
+    NSString *_properties;
+    NSString *_avatar;
 }
-
-
-@property (nonatomic,strong) UITextField *name;//名称
-@property (nonatomic,strong) UITextField *price;//价格
-@property (nonatomic,strong) UITextField *country;//国家
-@property (nonatomic,strong) UITextField *level;//等级
-@property (nonatomic,strong) UITextField *productArea;//产地
-@property (nonatomic,strong) UITextField *heightLevel;//海拔
-@property (nonatomic,strong) UITextView *flavorDesc;//风味描述
-@property (nonatomic,strong) UIImage *avatarImageCache;
-@property (nonatomic,strong) UIImage *flavorDescImageCache;
-
 
 @property (nonatomic,weak) UITableView *tableView;
 @property (nonatomic,copy) NSString *desc;//简介
@@ -62,7 +54,6 @@
     [self.view addSubview:bk];
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake((kApplicationWidth-600)/2, 64, 600, kApplicationHeight-164) style:UITableViewStylePlain];
-    //    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.showsVerticalScrollIndicator = NO;
     tableView.estimatedRowHeight = 44.f;
     tableView.rowHeight = UITableViewAutomaticDimension;
@@ -127,15 +118,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         CFAddCoffeeViewControllerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellReuser" forIndexPath:indexPath];
-        self.name = cell.name;
-        self.price = cell.price;
-        self.country = cell.country;
-        self.level =  cell.level;
-        self.productArea = cell.productArea;
-        self.heightLevel = cell.heightLevel;
-        self.flavorDesc = cell.flavorDesc;
-        self.avatarImageCache = cell.avatarImageCache;
-        self.flavorDescImageCache = cell.flavorDescImageCache;
+        cell.delegate = self;
         return cell;
     }else if(indexPath.section == 1) {
         id desc = _descArr[indexPath.row];
@@ -197,7 +180,6 @@
             [_videoArr removeAllObjects];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
-        
     }
 }
 
@@ -247,29 +229,23 @@
 
 - (void)saveCoffee {
     
-    if (self.name.text.length == 0 || self.price.text.length == 0) {
+    if (_name.length == 0 || _price.length == 0) {
         [self.view makeToast:@"咖啡名或价格不能为空"];
         return;
     }
-    NSString *cacheImageUUID = [NSString stringWithFormat:@"http://www.coffee.com/%@.jpg",[[NSUUID UUID] UUIDString]];
-    NSString *flavorDescImageCacheUUID = [NSString stringWithFormat:@"http://www.coffee.com/%@.jpg",[[NSUUID UUID] UUIDString]];
-    UIImage *cacheImage = self.avatarImageCache;
-    UIImage *flavorDescImageCache = self.flavorDescImageCache;
-    [[SDWebImageManager sharedManager] saveImageToCache:flavorDescImageCache forURL:[NSURL URLWithString:flavorDescImageCacheUUID]];
-    [[SDWebImageManager sharedManager] saveImageToCache:cacheImage forURL:[NSURL URLWithString:cacheImageUUID]];
+    if (_properties.length == 0) {
+        [self.view makeToast:@"咖啡描述不能为空"];
+        return;
+    }
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:[[NSUUID UUID] UUIDString] forKey: @"coffeeId"];
-    [dic setObject:self.name.text forKey: @"name"];
-    [dic setObject:self.price.text forKey: @"price"];
-    [dic setObject:cacheImageUUID forKey: @"avatarURL"];
+    [dic setObject:_name forKey: @"name"];
+    [dic setObject:_price forKey: @"price"];
+    if (_avatar.length>0) {
+        [dic setObject:_avatar forKey: @"avatarURL"];
+    }
     [dic setObject:@(_index) forKey:@"index"];
-    [dic setObject:self.country.text forKey: @"country"];
-    [dic setObject:self.productArea.text forKey: @"productArea"];
-    [dic setObject:self.heightLevel.text forKey: @"heightLevel"];
-    [dic setObject:self.level.text forKey: @"level"];
-    [dic setObject:self.flavorDesc.text forKey: @"flavorDesc"];
-    [dic setObject:flavorDescImageCacheUUID forKey: @"flavorDescURL"];
-    
+    [dic setObject:_properties forKey:@"properties"];
     NSString *desc = @"";
     for (id param in _descArr) {
         if ([param isKindOfClass:[NSString class]]) {
@@ -384,5 +360,13 @@
         [_tableView reloadData];
     }
 }
+
+-(void)finishEdit:(NSString *)name price:(NSString *)price properties:(NSString *)properties headImageURL:(NSString *)headImageURL {
+    _name = name;
+    _price = price;
+    _properties = properties;
+    _avatar = headImageURL;
+}
+
 
 @end

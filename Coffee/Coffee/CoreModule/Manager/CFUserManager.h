@@ -18,4 +18,12 @@
 
 - (void)removeCurrentUser;
 
+- (NSString *)firstTitle;
+
+- (NSString *)secondTitle;
+
+- (void)setFirstTitle:(NSString *)firstTitle;
+
+- (void)setSecondTitle:(NSString *)secondTitle;
+
 @end

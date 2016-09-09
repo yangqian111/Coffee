@@ -35,12 +35,7 @@
     @"name VARCHAR(45) NOT NULL,"
     @"avatarURL VARCHAR(255) NULL,"
     @"price VARCHAR(45) NOT NULL,"
-    @"country VARCHAR(45)  NULL,"
-    @"productArea TEXT NULL,"
-    @"heightLevel TEXT NULL,"
-    @"level TEXT NULL,"
-    @"flavorDesc TEXT NULL,"
-    @"flavorDescURL TEXT  NULL,"
+    @"properties TEXT NOT NULL,"
     @"desc TEXT NULL,"
     @"videoURL TEXT NULL,"
     @"UNIQUE(coffeeId)"
@@ -70,12 +65,12 @@
 
 #pragma mark - Coffee
 +(NSString *)sqlForAddCoffee {
-    NSString *sql = @"INSERT OR REPLACE INTO " kTableCoffee " (coffeeId,indexCoffee,name,avatarURL,price,country,productArea,heightLevel,level,flavorDesc,flavorDescURL,desc,videoURL) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    NSString *sql = @"INSERT OR REPLACE INTO " kTableCoffee " (coffeeId,indexCoffee,name,avatarURL,price,properties,desc,videoURL) VALUES (?,?,?,?,?,?,?,?)";
     return sql;
 }
 
 +(NSString *)sqlForUpdateCoffee {
-    NSString *sql = @"UPDATE OR IGNORE " kTableCoffee " SET indexCoffee = ?, name = ?, avatarURL = ?, price = ?, country = ?, productArea = ?, heightLevel = ?, level = ?,  flavorDesc = ?, flavorDescURL = ?, desc = ?, videoURL = ? WHERE coffeeId = ? ";
+    NSString *sql = @"UPDATE OR IGNORE " kTableCoffee " SET indexCoffee = ?, name = ?, avatarURL = ?, price = ?, properties = ?, desc = ?, videoURL = ? WHERE coffeeId = ? ";
     return sql;
 }
 

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #define kChangeApplicationBK @"kChangeApplicationBK"
+#define kChangeApplicationTitle @"kChangeApplicationTitle"
 
 @interface CFChangeBKImageViewController : CFBaseViewController
 

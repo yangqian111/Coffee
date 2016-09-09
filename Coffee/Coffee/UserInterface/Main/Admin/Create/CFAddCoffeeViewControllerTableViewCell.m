@@ -54,6 +54,7 @@
         
         UITextField *name = [UITextField new];
         name.delegate = self;
+        name.font = [UIFont systemFontOfSize:16];
         name.leftView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 4, 10)];
         name.leftViewMode = UITextFieldViewModeAlways;
         name.background = [UIImage imageNamed:@"short_biankuang"];
@@ -80,6 +81,7 @@
         
         UITextField *price = [UITextField new];
         price.delegate = self;
+        price.font = [UIFont systemFontOfSize:16];
         price.leftView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 4, 10)];
         price.leftViewMode = UITextFieldViewModeAlways;
         price.background = [UIImage imageNamed:@"short_biankuang"];
@@ -100,7 +102,7 @@
         
         UITextView *properties = [UITextView new];
         properties.delegate = self;
-        properties.font = [UIFont systemFontOfSize:18];
+        properties.font = [UIFont systemFontOfSize:16];
         properties.layer.contents = (id)[UIImage imageNamed:@"biankuang3"].CGImage;
         properties.textColor = [UIColor colorWithHexString:@"5e544a"];
         [self.contentView addSubview:properties];

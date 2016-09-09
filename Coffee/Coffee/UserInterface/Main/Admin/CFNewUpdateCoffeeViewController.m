@@ -309,6 +309,8 @@
     [dic setObject:_price forKey: @"price"];
     if (_avatar.length>0) {
         [dic setObject:_avatar forKey: @"avatarURL"];
+    }else{
+        [dic setObject:_coffee.avatarURL forKey:@"avatarURL"];
     }
     [dic setObject:_properties forKey: @"properties"];
     [dic setObject:@(_coffee.index) forKey:@"index"];

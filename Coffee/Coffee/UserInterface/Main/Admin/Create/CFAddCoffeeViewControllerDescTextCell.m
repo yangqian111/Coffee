@@ -27,7 +27,7 @@
         label.numberOfLines = 0;
         label.lineBreakMode = NSLineBreakByCharWrapping;
         self.text = label;
-        label.font = [UIFont systemFontOfSize:16];
+        label.font = [UIFont systemFontOfSize:15];
         label.textColor = [UIColor colorWithHexString:@"676561"];
         [self.contentView addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -104,6 +104,7 @@
         properties.numberOfLines = 0;
         properties.lineBreakMode = NSLineBreakByWordWrapping;
         self.properties = properties;
+        properties.font  = [UIFont systemFontOfSize:16];
         properties.textColor = [UIColor colorWithHexString:@"5e544a"];
         [self.contentView addSubview:properties];
         [properties mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -115,7 +116,7 @@
         
         TYAttributedLabel *descLabel = [TYAttributedLabel new];
         descLabel.linesSpacing = 15.f;
-        descLabel.font = [UIFont systemFontOfSize:16];
+        descLabel.font = [UIFont systemFontOfSize:15];
         descLabel.textColor = [UIColor colorWithHexString:@"676561"];
         descLabel.backgroundColor = [UIColor clearColor];
         self.descLabel = descLabel;

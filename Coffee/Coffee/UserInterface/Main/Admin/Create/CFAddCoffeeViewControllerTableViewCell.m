@@ -102,8 +102,6 @@
         
         UITextView *properties = [UITextView new];
         properties.delegate = self;
-        properties.font = [UIFont systemFontOfSize:16];
-        properties.layer.contents = (id)[UIImage imageNamed:@"biankuang3"].CGImage;
         properties.textColor = [UIColor colorWithHexString:@"5e544a"];
         properties.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
         

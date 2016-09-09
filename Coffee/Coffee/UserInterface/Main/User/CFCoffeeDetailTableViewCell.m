@@ -101,13 +101,12 @@
         
         UILabel *properties = [UILabel new];
         properties.textColor = [UIColor colorWithHexString:@"5e544a"];
-        properties.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
+        properties.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
         properties.contentMode = UIViewContentModeTopLeft;
         properties.numberOfLines = 0;
         properties.lineBreakMode = NSLineBreakByWordWrapping;
         self.properties = properties;
-        properties.font  = [UIFont systemFontOfSize:16];
-        properties.textColor = [UIColor colorWithHexString:@"5e544a"];
+        
         [self.contentView addSubview:properties];
         [properties mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(nameLabel);

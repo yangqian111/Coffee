@@ -77,7 +77,7 @@
         [_descImageView setBackgroundImage:image forState:UIControlStateNormal];
     }else{
         [_descImageView setBackgroundImage:[UIImage imageNamed:@"kuang8"] forState:UIControlStateNormal];
-        [_descImageView setTitle:@"添加图片(图片尺寸建议：1095 * 305)" forState:UIControlStateNormal];
+        [_descImageView setTitle:@"添加图片(图片尺寸建议：1200 * 600)" forState:UIControlStateNormal];
     }
 }
 

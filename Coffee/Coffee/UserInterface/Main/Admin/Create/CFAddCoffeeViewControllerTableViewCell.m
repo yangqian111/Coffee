@@ -57,7 +57,7 @@
         name.leftView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 4, 10)];
         name.leftViewMode = UITextFieldViewModeAlways;
         name.background = [UIImage imageNamed:@"short_biankuang"];
-        name.textColor = [UIColor blackColor];
+        name.textColor = [UIColor colorWithHexString:@"5e544a"];
         [self.contentView addSubview:name];
         self.name = name;
         [name mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -83,7 +83,7 @@
         price.leftView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 4, 10)];
         price.leftViewMode = UITextFieldViewModeAlways;
         price.background = [UIImage imageNamed:@"short_biankuang"];
-        price.textColor = [UIColor blackColor];
+        price.textColor = [UIColor colorWithHexString:@"5e544a"];
         [self.contentView addSubview:price];
         self.price = price;
         [price mas_makeConstraints:^(MASConstraintMaker *make) {

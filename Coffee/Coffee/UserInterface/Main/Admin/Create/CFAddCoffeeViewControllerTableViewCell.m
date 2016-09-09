@@ -100,9 +100,10 @@
         
         UITextView *properties = [UITextView new];
         properties.delegate = self;
-        properties.font = [UIFont systemFontOfSize:18];
+        properties.textColor = [UIColor colorWithHexString:@"5e544a"];
+        properties.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
+        
         properties.layer.contents = (id)[UIImage imageNamed:@"biankuang3"].CGImage;
-        properties.textColor = [UIColor blackColor];
         [self.contentView addSubview:properties];
         self.properties = properties;
         [properties mas_makeConstraints:^(MASConstraintMaker *make) {

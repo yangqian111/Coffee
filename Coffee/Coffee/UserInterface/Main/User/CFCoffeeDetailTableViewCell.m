@@ -67,7 +67,7 @@
         }];
         
         UILabel *name = [UILabel new];
-        name.textColor = [UIColor colorWithHexString:@"676561"];
+        name.textColor = [UIColor colorWithHexString:@"5e544a"];
         name.font  = [UIFont systemFontOfSize:16];
         [self.contentView addSubview:name];
         self.name = name;
@@ -90,7 +90,7 @@
         
         UILabel *price = [UILabel new];
         [self.contentView addSubview:price];
-        price.textColor = [UIColor colorWithHexString:@"676561"];
+        price.textColor = [UIColor colorWithHexString:@"5e544a"];
         price.font  = [UIFont systemFontOfSize:16];
         self.price = price;
         [price mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -100,11 +100,13 @@
         }];
         
         UILabel *properties = [UILabel new];
+        properties.textColor = [UIColor colorWithHexString:@"5e544a"];
+        properties.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
         properties.contentMode = UIViewContentModeTopLeft;
         properties.numberOfLines = 0;
         properties.lineBreakMode = NSLineBreakByWordWrapping;
         self.properties = properties;
-        properties.textColor = [UIColor redColor];
+        
         [self.contentView addSubview:properties];
         [properties mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(nameLabel);

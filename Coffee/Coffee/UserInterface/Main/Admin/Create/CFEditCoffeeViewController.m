@@ -42,7 +42,7 @@
     self.textView = textView;
     
     UIButton *addImageBtn = [UIButton new];
-    [addImageBtn setTitle:@"添加图片(图片尺寸建议：1095 * 305)" forState:UIControlStateNormal];
+    [addImageBtn setTitle:@"添加图片(图片尺寸建议：1200 * 600)" forState:UIControlStateNormal];
     addImageBtn.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20];
     [addImageBtn setTitleColor:[UIColor colorWithHexString:@"614A3D"] forState:UIControlStateNormal];
     addImageBtn.titleLabel.textAlignment = NSTextAlignmentCenter;

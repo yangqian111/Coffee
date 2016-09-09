@@ -53,7 +53,7 @@
     [addImageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
         make.width.mas_equalTo(600);
-        make.height.mas_equalTo(150);
+        make.height.mas_equalTo(200);
         make.top.mas_equalTo(textView.mas_bottom).mas_offset(20);
     }];
     

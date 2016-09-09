@@ -100,6 +100,8 @@
         }];
         
         UILabel *properties = [UILabel new];
+        properties.textColor = [UIColor colorWithHexString:@"5e544a"];
+        properties.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
         properties.contentMode = UIViewContentModeTopLeft;
         properties.numberOfLines = 0;
         properties.lineBreakMode = NSLineBreakByWordWrapping;

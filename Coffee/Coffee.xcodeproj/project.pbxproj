@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		320E2326655F0556350FED79 /* libPods-Coffee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 725C6117BACCF014A46337B6 /* libPods-Coffee.a */; };
+		5602C66F1E77802E00B0EC47 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5602C66E1E77802E00B0EC47 /* MobileCoreServices.framework */; };
 		5613E8941D51F6DD00316704 /* CFBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5613E8931D51F6DD00316704 /* CFBaseViewController.m */; };
 		562EA8381D4A04D00023D753 /* UIView+HSUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 562EA8371D4A04D00023D753 /* UIView+HSUIView.m */; };
 		562EA83F1D4B0CAE0023D753 /* XWDragCellCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 562EA83E1D4B0CAE0023D753 /* XWDragCellCollectionView.m */; };
@@ -66,6 +67,7 @@
 /* Begin PBXFileReference section */
 		1624FCE9E6BE18796066826A /* Pods-Coffee.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coffee.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Coffee/Pods-Coffee.release.xcconfig"; sourceTree = "<group>"; };
 		234CB3DDAA60062B63E8BBB9 /* Pods-Coffee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coffee.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-Coffee/Pods-Coffee.debug.xcconfig"; sourceTree = "<group>"; };
+		5602C66E1E77802E00B0EC47 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		5613E8921D51F6DD00316704 /* CFBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFBaseViewController.h; sourceTree = "<group>"; };
 		5613E8931D51F6DD00316704 /* CFBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFBaseViewController.m; sourceTree = "<group>"; };
 		562EA8361D4A04D00023D753 /* UIView+HSUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HSUIView.h"; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5602C66F1E77802E00B0EC47 /* MobileCoreServices.framework in Frameworks */,
 				562EA85B1D4B43A20023D753 /* AssetsLibrary.framework in Frameworks */,
 				562EA8591D4B41920023D753 /* AVFoundation.framework in Frameworks */,
 				320E2326655F0556350FED79 /* libPods-Coffee.a in Frameworks */,
@@ -475,6 +478,7 @@
 		EC258156A112C290A8C4F2CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5602C66E1E77802E00B0EC47 /* MobileCoreServices.framework */,
 				562EA85A1D4B43A20023D753 /* AssetsLibrary.framework */,
 				562EA8581D4B41920023D753 /* AVFoundation.framework */,
 				725C6117BACCF014A46337B6 /* libPods-Coffee.a */,
@@ -489,7 +493,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 563649051D2F845E00353FC4 /* Build configuration list for PBXNativeTarget "Coffee" */;
 			buildPhases = (
-				B77FDB67CC228B6704B5DB32 /* 📦 Check Pods Manifest.lock */,
+				B77FDB67CC228B6704B5DB32 /* [CP] Check Pods Manifest.lock */,
 				F10EBBF10E5BCDA923C9D916 /* [CP] Check Pods Manifest.lock */,
 				563648EA1D2F845D00353FC4 /* Sources */,
 				563648EB1D2F845D00353FC4 /* Frameworks */,
@@ -515,7 +519,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = CF;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = yangqian;
 				TargetAttributes = {
 					563648ED1D2F845D00353FC4 = {
@@ -586,19 +590,19 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-Coffee/Pods-Coffee-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B77FDB67CC228B6704B5DB32 /* 📦 Check Pods Manifest.lock */ = {
+		B77FDB67CC228B6704B5DB32 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		EBD42DCEE8869B3110ECDB51 /* [CP] Embed Pods Frameworks */ = {
@@ -722,8 +726,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -767,8 +773,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

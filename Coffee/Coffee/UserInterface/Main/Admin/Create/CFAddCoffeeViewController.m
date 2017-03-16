@@ -15,6 +15,7 @@
 #import "CFEditCoffeeViewController.h"
 #import "CFAddCoffeeViewControllerDescVideoCell.h"
 #import <AVFoundation/AVFoundation.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @interface CFAddCoffeeViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,CFEditCoffeeViewControllerDelegate,CFAddCoffeeViewControllerTableViewCellDelegate>
 {
@@ -196,8 +197,8 @@
         }
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;//sourcetype有三种分别是camera，photoLibrary和photoAlbum
-        NSArray *availableMedia = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];//Camera所支持的Media格式都有哪些,共有两个分别是@"public.image",@"public.movie"
-        imagePicker.mediaTypes = [NSArray arrayWithObject:availableMedia[1]];//设置媒体类型为public.movie
+//        NSArray *availableMedia = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];//Camera所支持的Media格式都有哪些,共有两个分别是@"public.image",@"public.movie"
+        imagePicker.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];//设置媒体类型为public.movie
         imagePicker.delegate = self;//设置委托
         imagePicker.navigationBar.tintColor = [UIColor blackColor];
         [imagePicker.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];

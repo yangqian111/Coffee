@@ -812,7 +812,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Coffee/Support Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yangqian.coffee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netease.devna;
 				PRODUCT_NAME = Coffee;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -831,7 +831,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Coffee/Support Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yangqian.coffee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netease.devna;
 				PRODUCT_NAME = Coffee;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;

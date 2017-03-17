@@ -16,7 +16,7 @@
 @property (nonatomic,weak) UILabel *name;
 @property (nonatomic,weak) UILabel *price;
 
-@property (nonatomic,weak) UILabel *properties;
+@property (nonatomic,weak) UITextView *properties;
 @property (nonatomic,weak) TYAttributedLabel *descLabel;
 @property (nonatomic,strong) MPMoviePlayerController *moviePlayer;//视频播放控制器
 @property (nonatomic,strong) UIButton *button;
@@ -29,6 +29,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        
         self.backgroundColor = [UIColor clearColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         UIImageView *icon = [UIImageView new];
@@ -99,30 +100,33 @@
             make.width.mas_equalTo(150);
         }];
         
-        UILabel *properties = [UILabel new];
-        properties.textColor = [UIColor colorWithHexString:@"5e544a"];
-        properties.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
-        properties.contentMode = UIViewContentModeTopLeft;
-        properties.numberOfLines = 0;
-        properties.lineBreakMode = NSLineBreakByWordWrapping;
+        UITextView *properties = [UITextView new];
+//        properties.textColor = ;
+//        properties.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
+//        properties.contentMode = UIViewContentModeTopLeft;
+//        properties.numberOfLines = 0;
+//        properties.lineBreakMode = NSLineBreakByCharWrapping;
         self.properties = properties;
+        self.properties.editable = NO;
+    
+        self.properties.backgroundColor = [UIColor clearColor];
         
         [self.contentView addSubview:properties];
         [properties mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(nameLabel);
             make.top.mas_equalTo(name.mas_bottom).mas_offset(5);
-            make.right.mas_equalTo(price);
+            make.right.mas_equalTo(price).mas_offset(-20);
             make.bottom.mas_greaterThanOrEqualTo(addAvatar);
         }];
         
         TYAttributedLabel *descLabel = [TYAttributedLabel new];
-        descLabel.linesSpacing = 15.f;
+        descLabel.linesSpacing = 10.f;
         descLabel.font = [UIFont systemFontOfSize:15];
         descLabel.textColor = [UIColor colorWithHexString:@"676561"];
         descLabel.backgroundColor = [UIColor clearColor];
         self.descLabel = descLabel;
         [self.contentView addSubview:descLabel];
-        descLabel.preferredMaxLayoutWidth = 600;
+        descLabel.preferredMaxLayoutWidth = 580;
         [descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(addAvatar);
             make.top.mas_equalTo(properties.mas_bottom).mas_offset(20);
@@ -173,7 +177,16 @@
     self.price.text = model.price;
     NSString  *msg;
     msg = [NSString stringWithFormat:@"%@",[model.properties stringByReplacingOccurrencesOfString:@"\\n" withString:@" \r\n" ]];
-    self.properties.text = msg;
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 10;// 字体的行间距
+    NSDictionary *attributes = @{
+                                 NSFontAttributeName:[UIFont systemFontOfSize:15],
+                                 NSParagraphStyleAttributeName:paragraphStyle,
+                                 NSForegroundColorAttributeName:[UIColor colorWithHexString:@"676561"]
+                                 };
+    self.properties.attributedText = [[NSAttributedString alloc] initWithString:msg attributes:attributes];
+//    self.properties.text = msg;
     
     NSString *desc = model.desc;
     // 分割文本到数组
